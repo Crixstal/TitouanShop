@@ -128,7 +128,7 @@ fabric.properties
 
 # Visual Studio cache directory
 .vs/
-.vsconfig/
+.vsconfig
 
 # Gradle cache directory
 .gradle/
