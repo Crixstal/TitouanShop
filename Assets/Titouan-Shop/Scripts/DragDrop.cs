@@ -23,11 +23,12 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            Instantiate(this,transform.parent).name = gameObject.name;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            rectransform.anchoredPosition = originPosition;
+            Destroy(gameObject);
         }
 
         public void OnDrag(PointerEventData eventData)

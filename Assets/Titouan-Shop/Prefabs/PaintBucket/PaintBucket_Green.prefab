@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1157528765320394087}
   - component: {fileID: 1157528765320394085}
   - component: {fileID: 1157528765320394086}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: PaintBucket_Green
-  m_TagString: Untagged
+  m_TagString: Bucket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
