@@ -15,9 +15,9 @@ namespace Com.IsartDigital.TitouanShop
         {
             Rect rect = GetComponent<RectTransform>().rect;
 
-            GetComponent<BoxCollider2D>().offset = new Vector2(0,rect.height/4);
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width, rect.height/2);
-            
+            GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
+
             GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
         }
     }
