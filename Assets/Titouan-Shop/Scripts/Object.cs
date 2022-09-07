@@ -1,41 +1,94 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Com.IsartDigital.TitouanShop.TitouanShop
 {
-    public class Object : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
+    public class Object : MonoBehaviour,  IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
-        [SerializeField] private Canvas canvas;
-        [SerializeField] private GraphicRaycaster m_Raycaster;
-        [SerializeField] private EventSystem m_EventSystem;
-        [SerializeField] private RectTransform canvasRect;
-
+        private Canvas canvas;
         private RectTransform rectransform;
-        private Vector3 originPosition;
         private int index = 0;
+        private float counterDelayStart = 0;
+        private float doDelayStart = 1f;
+        private GameObject gameObjectToCheck;
+        private Color32 colorToCheck;
+        private bool startToDrag = false;
+        private GameObject customerToCheck;
+
+        private const string TAG_CHARACTER = "Character";
 
         private void Awake()
         {
-            rectransform = GetComponent<RectTransform>();
-            originPosition = rectransform.anchoredPosition;
+            canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            rectransform = transform.parent.GetComponent<RectTransform>();
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void Update()
         {
- 
+            counterDelayStart += Time.deltaTime;
+
+            if (counterDelayStart >= doDelayStart)
+            {
+                Rect rect = gameObject.GetComponent<RectTransform>().rect;
+
+                gameObject.GetComponent<BoxCollider2D>().size = new Vector2(
+                    rect.width,
+                    rect.height
+                );
+
+                gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(rect.width / 2, 0);
+            }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Instantiate(this, transform.parent).name = gameObject.name;
+            //GameObject __gameObject = Instantiate(transform.parent.gameObject,transform.parent);
+            GameObject _gameObject = Instantiate(gameObject.transform.parent.gameObject, gameObject.transform);
+            _gameObject.transform.GetChild(0).gameObject.name = gameObject.name;
+            _gameObject.transform.SetParent(gameObject.transform.parent.parent);
+            _gameObject.transform.SetSiblingIndex(gameObject.transform.GetSiblingIndex());
+            gameObject.transform.parent.SetParent(canvas.gameObject.transform);
+            startToDrag = true;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Destroy(gameObject);
+            startToDrag = false;
+
+            Color32 actualColor = gameObject.GetComponent<Image>().color;
+
+            Debug.Log(gameObjectToCheck);
+
+            if (gameObject.name.IndexOf(" ") > 0)
+            {
+                if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
+                {
+                    Debug.Log("Same Object");
+                    Destroy(customerToCheck);
+                }
+            }
+            else if (gameObject.name.IndexOf("(") > 0)
+            {
+                if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
+                {
+                    Debug.Log("Same Object");
+                    Destroy(customerToCheck);
+                }
+            }
+            else
+            {
+                if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
+                {
+                    Debug.Log("Same Object");
+                    Destroy(customerToCheck);
+                }
+            }
+
+            Destroy(gameObject.transform.parent.gameObject);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -45,19 +98,42 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            List<Color> allColorAvailable = GameManager.allColorAvailable;
-
-            if (allColorAvailable.Count >= 1)
+            if (!startToDrag)
             {
-                index++;
+                List<Color> allColorAvailable = GameManager.allColorAvailable;
 
-                if (index >= allColorAvailable.Count)
+                if (allColorAvailable.Count >= 1)
                 {
-                    index = 0;
-                }
+                    index++;
 
-                gameObject.GetComponent<Image>().color = allColorAvailable[index];
+                    if (index >= allColorAvailable.Count)
+                    {
+                        index = 0;
+                    }
+
+                    gameObject.GetComponent<Image>().color = allColorAvailable[index];
+                }
             }
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == TAG_CHARACTER)
+            {
+                gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
+                colorToCheck = collision.GetComponent<Customer>().color;
+                customerToCheck = collision.gameObject;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            gameObjectToCheck = null;
+            colorToCheck = default;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
         }
     }
 }

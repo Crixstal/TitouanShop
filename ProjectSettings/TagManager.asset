@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Object
   - Bucket
+  - Character
   layers:
   - Default
   - TransparentFX
