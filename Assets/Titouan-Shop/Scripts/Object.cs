@@ -111,8 +111,8 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         {
             if (collision.gameObject.tag == TAG_CHARACTER)
             {
-                gameObjectToCheck = collision.GetComponent<Character>().requestedObject;
-                colorToCheck = collision.GetComponent<Character>().color;
+                gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
+                colorToCheck = collision.GetComponent<Customer>().color;
             }
         }
 
