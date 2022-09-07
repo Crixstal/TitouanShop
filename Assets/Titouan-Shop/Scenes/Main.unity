@@ -199,7 +199,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_Name
-      value: Banane
+      value: Banane_Fond
       objectReference: {fileID: 0}
     - target: {fileID: 3421366134033243160, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_Pivot.x
@@ -255,15 +255,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3421366134033243160, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3421366134033243160, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3421366134033243160, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3421366134033243160, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -541,7 +541,7 @@ MonoBehaviour:
     m_Right: 25
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2048283574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ea1f508431cb3046a50781d0a9b07cd, type: 3}
+  m_Script: {fileID: 11500000, guid: c89d1395bd89ecd4b9b99147f0cf2ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customer: {fileID: 9216369569556825967, guid: 3a386c806284fb44e82822a58914cf06, type: 3}
+  customer: {fileID: 9216369569556825967, guid: 5b0f71a31b828554f93a3fcfba16dd40, type: 3}

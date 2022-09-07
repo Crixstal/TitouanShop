@@ -46,7 +46,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-
             //GameObject __gameObject = Instantiate(transform.parent.gameObject,transform.parent);
             GameObject _gameObject = Instantiate(gameObject.transform.parent.gameObject, gameObject.transform);
             _gameObject.transform.GetChild(0).gameObject.name = gameObject.name;
@@ -119,20 +118,16 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            Debug.Log("Enter");
-
             if (collision.gameObject.tag == TAG_CHARACTER)
             {
-                gameObjectToCheck = collision.GetComponent<Character>().requestedObject;
-                colorToCheck = collision.GetComponent<Character>().color;
+                gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
+                colorToCheck = collision.GetComponent<Customer>().color;
                 customerToCheck = collision.gameObject;
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            Debug.Log("Exit");
-
             gameObjectToCheck = null;
             colorToCheck = default;
         }

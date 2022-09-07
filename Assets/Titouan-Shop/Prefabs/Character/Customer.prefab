@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9216369569556825961}
   - component: {fileID: 7103695028196244973}
   - component: {fileID: 1649251243176496312}
-  - component: {fileID: 5394027421437235289}
+  - component: {fileID: 5816569176053661096}
   m_Layer: 5
   m_Name: Customer
   m_TagString: Character
@@ -126,7 +126,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5394027421437235289
+--- !u!114 &5816569176053661096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,11 +135,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9216369569556825967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65048fa57912d14b8d5ca0db6d1d996, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f750d942b8de734390a5507df32845d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requestedObject: {fileID: 0}
+  requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   customerSpriteList:
-  - {fileID: 21300000, guid: 7a8cfbcac35674c4daa9e67cdf7b0751, type: 3}
-  - {fileID: 21300000, guid: cf3a91e84ffce2e4b89ef567c4745d3b, type: 3}
+  - {fileID: 21300000, guid: abef539784bfb0d4e9e748a39f11e3ec, type: 3}
+  - {fileID: 21300000, guid: abef539784bfb0d4e9e748a39f11e3ec, type: 3}
