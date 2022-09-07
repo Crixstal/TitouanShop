@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!1 &995246415
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,9 +1027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a31d9dfef16b6846b6ca54413fe0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Raycaster: {fileID: 1839283007}
-  m_EventSystem: {fileID: 2885370}
-  canvasRect: {fileID: 1839283010}
 --- !u!1 &1444241154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1082,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1709267365}
   m_Layer: 5
-  m_Name: FullSpawn
+  m_Name: StorySpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1236,7 +1232,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1355,6 +1351,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea1f508431cb3046a50781d0a9b07cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allObjects: []
-  customer: {fileID: 0}
-  myButton: {fileID: 0}
+  customer: {fileID: 9216369569556825967, guid: 3a386c806284fb44e82822a58914cf06, type: 3}

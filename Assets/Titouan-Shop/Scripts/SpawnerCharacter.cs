@@ -1,57 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Com.IsartDigital.TitouanShop.TitouanShop {
     public class SpawnerCharacter : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> allObjects = new List<GameObject>();
         [SerializeField] private GameObject customer;
-        [SerializeField] private Button myButton;
 
+        private float customerCounter = 0;
         private Transform spawnRight;
+        
         private Transform spawnLeft;
         private Transform spawnMiddle;
-        private Transform spawnFull;
+        private Transform spawnStory;
         
-        private List<GameObject> selectObject = new List<GameObject>();
         private List<Transform> spawnList = new List<Transform>();
-
-        private float counter = 0;
 
         private void Start()
         {
             spawnRight = transform.Find("RightSpawn");
             spawnLeft = transform.Find("LeftSpawn");
             spawnMiddle = transform.Find("MiddleSpawn");
-            spawnFull = transform.Find("FullSpawn");
+            spawnStory = transform.Find("StorySpawn");
             
-            //spawnList = Add<>
-
-            ++counter;
-
-            Tuto();
+            spawnList.Add(spawnRight);
+            spawnList.Add(spawnLeft);
+            spawnList.Add(spawnMiddle);
         }
 
         private void Update()
         {
-            myButton.onClick.AddListener(AddCharacter);
+            foreach (var spawner in spawnList)
+            {
+                if (spawner.childCount == 0)
+                    StartCoroutine(WaitCoroutine(spawner));
+            }
+        }
+        
+        IEnumerator WaitCoroutine(Transform spawner)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (spawner.childCount == 0)
+                AddCharacter(spawner);
         }
 
-        private void AddCharacter()
+        private void AddCharacter(Transform spawner)
         {
-            if (canInstantiate())
-                Instantiate(customer, spawnFull);
-        }
-
-        private bool canInstantiate()
-        {
-            if (transform.childCount > 0)
-                return false;
-            
-            return true;
+            Instantiate(customer, spawner);
+            ++customerCounter;
         }
         
         private void Tuto()
