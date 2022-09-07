@@ -6,18 +6,20 @@ namespace Com.IsartDigital.TitouanShop
 {
     public class Character : MonoBehaviour
     {
-        private GameObject requestedObject;
+        [SerializeField] public GameObject requestedObject;
+        public Color color = Color.white;
+
         private float counter;
         private float timeLimit;
 
-        void Start()
+        private void Start()
         {
-            
-        }
+            Rect rect = gameObject.GetComponent<RectTransform>().rect;
 
-        void Update()
-        {
-        
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(
+                rect.width,
+                rect.height
+            );
         }
     }
 }

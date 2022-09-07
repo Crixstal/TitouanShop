@@ -13,6 +13,7 @@ namespace Com.IsartDigital.TitouanShop
         {
             allColorAvailable.Add(allColor[0]);
             allColorAvailable.Add(allColor[1]);
+            allColorAvailable.Add(allColor[2]);
         }
     }
 }
