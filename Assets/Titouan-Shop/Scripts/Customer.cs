@@ -13,9 +13,10 @@ namespace Com.IsartDigital.TitouanShop
         
         private void Start()
         {
-            Rect rect = gameObject.GetComponent<RectTransform>().rect;
+            Rect rect = GetComponent<RectTransform>().rect;
 
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width, rect.height);
+            GetComponent<BoxCollider2D>().offset = new Vector2(0,rect.height/4);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width, rect.height/2);
             
             GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
         }
