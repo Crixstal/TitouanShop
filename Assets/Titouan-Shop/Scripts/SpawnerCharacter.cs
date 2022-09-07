@@ -1,34 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Com.IsartDigital.TitouanShop.TitouanShop {
     public class SpawnerCharacter : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> allObjects = new List<GameObject>();
-        [SerializeField] private GameObject character;
+        [SerializeField] private GameObject customer;
 
-        private List<GameObject> selectObject = new List<GameObject>();
-        private float counter;
+        private float customerCounter = 0;
+        private Transform spawnRight;
+        
+        private Transform spawnLeft;
+        private Transform spawnMiddle;
+        private Transform spawnStory;
+        
+        private List<Transform> spawnList = new List<Transform>();
 
         private void Start()
         {
+            spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
+            spawnLeft = transform.GetChild(0).transform.Find("LeftSpawn");
+            spawnMiddle = transform.GetChild(0).transform.Find("MiddleSpawn");
+            spawnStory = transform.Find("StorySpawn");
+            
+            spawnList.Add(spawnRight);
+            spawnList.Add(spawnLeft);
+            spawnList.Add(spawnMiddle);
         }
 
         private void Update()
         {
-            //if (counter > 3)
-            //{
-            //    int random = Random.Range(0, color.Count - 1);
+            foreach (var spawner in spawnList)
+            {
+                if (spawner.childCount == 0)
+                    StartCoroutine(WaitCoroutine(spawner));
+            }
+        }
+        
+        IEnumerator WaitCoroutine(Transform spawner)
+        {
+            yield return new WaitForSeconds(1f);
 
-            //    allColorAvailable.Add(color[random]);
-            //    color.RemoveAt(random);
-            //}
+            if (spawner.childCount == 0)
+                AddCharacter(spawner);
         }
 
-        private void addCharacter(GameObject gameObject)
+        private void AddCharacter(Transform spawner)
         {
-
+            Instantiate(customer, spawner);
+            ++customerCounter;
+        }
+        
+        private void Tuto()
+        {
+            // right - left / banane
+            // middle / banane / color
+            // full / banane / all colors
+            // middle / new obj
+            // full
+            // nawak
         }
     }
 }
