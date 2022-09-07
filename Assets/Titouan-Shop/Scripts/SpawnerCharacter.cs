@@ -19,9 +19,9 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
         private void Start()
         {
-            spawnRight = transform.Find("RightSpawn");
-            spawnLeft = transform.Find("LeftSpawn");
-            spawnMiddle = transform.Find("MiddleSpawn");
+            spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
+            spawnLeft = transform.GetChild(0).transform.Find("LeftSpawn");
+            spawnMiddle = transform.GetChild(0).transform.Find("MiddleSpawn");
             spawnStory = transform.Find("StorySpawn");
             
             spawnList.Add(spawnRight);
