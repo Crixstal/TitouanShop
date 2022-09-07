@@ -93,11 +93,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             {
                 List<Color> allColorAvailable = GameManager.allColorAvailable;
 
-                for (int i = 0; i < allColorAvailable.Count; i++)
-                {
-                    Debug.Log(allColorAvailable[i]);
-                }
-
                 if (allColorAvailable.Count >= 1)
                 {
                     index++;
