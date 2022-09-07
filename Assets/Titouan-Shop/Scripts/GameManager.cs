@@ -1,19 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
+using Com.IsartDigital.TitouanShop.TitouanShop;
 using UnityEngine;
 
 namespace Com.IsartDigital.TitouanShop
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private SpawnerCharacter counter;
+        
         [SerializeField] public List<Color> allColor = new List<Color>();
         public static List<Color> allColorAvailable = new List<Color>();
+        
+        [SerializeField] public List<Sprite> allSprite = new List<Sprite>();
+        public static List<Sprite> allSpriteAvailable = new List<Sprite>();
 
+        [SerializeField] public int tutoColor, tutoObject, endgame;
+        [SerializeField] private int randomTimer;
+        [SerializeField] private int indexCrazyObject;
+
+        private int indexColor = 0;
+        private int indexSprite = 0;
+        [HideInInspector] public bool crazyObjDone = false;
+        
         private void Start()
         {
-            allColorAvailable.Add(allColor[0]);
-            allColorAvailable.Add(allColor[1]);
-            allColorAvailable.Add(allColor[2]);
+            allColorAvailable.Add(allColor[indexColor]);
+            allSpriteAvailable.Add(allSprite[indexSprite]);
+        }
+
+        private void Update()
+        {
+            if (counter.customerCounter == tutoColor) // tuto new color
+                NewColor();
+                
+            else if (counter.customerCounter == tutoObject) // tuto new object    
+                NewObject();
+                
+            else if (counter.customerCounter > tutoObject && crazyObjDone == false) // random
+                StartCoroutine(WaitCoroutine());
+                
+            else if (indexSprite == indexCrazyObject) // introduce crazy object    
+            {
+                NewObject();
+                crazyObjDone = true;
+            }
+            
+            else if (crazyObjDone && counter.customerCounter < endgame) // random
+                StartCoroutine(WaitCoroutine());
+                
+            else if (counter.customerCounter >= endgame) // end game
+                allSpriteAvailable.Add(allSprite[++indexSprite]);
+        }
+        
+        IEnumerator WaitCoroutine()
+        {
+            yield return new WaitForSeconds(randomTimer);
+            RandomAdd();
+        }
+        
+        private void NewColor()
+        {
+            allColorAvailable.Add(allColor[++indexColor]);
+        }
+        
+        private void NewObject()
+        {
+            allSpriteAvailable.Add(allSprite[++indexSprite]);
+        }
+        
+        private void RandomAdd()
+        {
+            int randomNb = 0;
+            float rand = Random.value;
+            
+            if (rand >= 0f && rand < 0.25f)
+                randomNb = 0;
+            else if (rand >= 0.25f && rand < 0.5f)
+                randomNb = 1;
+            else if (rand >= 0.5f)
+                randomNb = 2;
+            
+            switch (randomNb)
+            {
+                case 0:
+                    allColorAvailable.Add(allColor[++indexColor]);
+                    break;
+                case 1:
+                    allSpriteAvailable.Add(allSprite[++indexSprite]);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
