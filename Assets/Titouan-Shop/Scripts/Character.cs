@@ -9,9 +9,6 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] public GameObject requestedObject;
         public Color color = Color.white;
 
-        private float counter;
-        private float timeLimit;
-
         private void Start()
         {
             Rect rect = gameObject.GetComponent<RectTransform>().rect;

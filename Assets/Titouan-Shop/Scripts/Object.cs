@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Com.IsartDigital.TitouanShop.TitouanShop
 {
-    public class Object : MonoBehaviour,  IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
+    public class Object : MonoBehaviour,  IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
         private Canvas canvas;
         private RectTransform rectransform;
@@ -19,7 +19,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         private bool startToDrag = false;
 
         private const string TAG_CHARACTER = "Character";
-        private Button btn;
 
         private void Awake()
         {
@@ -66,9 +65,15 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                     Debug.Log("Same Object");
                 }
             }
-            else
+            else if (gameObject.name.IndexOf("(") > 0)
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
+                {
+                    Debug.Log("Same Object");
+                }
+            }else
+            {
+                if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
                 {
                     Debug.Log("Same Object");
                 }
@@ -87,6 +92,11 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             if (!startToDrag)
             {
                 List<Color> allColorAvailable = GameManager.allColorAvailable;
+
+                for (int i = 0; i < allColorAvailable.Count; i++)
+                {
+                    Debug.Log(allColorAvailable[i]);
+                }
 
                 if (allColorAvailable.Count >= 1)
                 {
@@ -115,6 +125,10 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         {
             gameObjectToCheck = null;
             colorToCheck = default;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
         }
     }
 }
