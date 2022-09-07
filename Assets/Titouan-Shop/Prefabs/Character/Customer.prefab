@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 9216369569556825966}
   - component: {fileID: 9216369569556825960}
   - component: {fileID: 9216369569556825961}
-  - component: {fileID: 3350384221181891841}
   - component: {fileID: 7103695028196244973}
   - component: {fileID: 1649251243176496312}
+  - component: {fileID: 5394027421437235289}
   m_Layer: 5
-  m_Name: Character
+  m_Name: Customer
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cf3a91e84ffce2e4b89ef567c4745d3b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -79,20 +79,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3350384221181891841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9216369569556825967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 091813482e5d08948b4cabec516b2ee1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
-  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &7103695028196244973
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,3 +126,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5394027421437235289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216369569556825967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f65048fa57912d14b8d5ca0db6d1d996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requestedObject: {fileID: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  customerSpriteList:
+  - {fileID: 21300000, guid: 7a8cfbcac35674c4daa9e67cdf7b0751, type: 3}
+  - {fileID: 21300000, guid: cf3a91e84ffce2e4b89ef567c4745d3b, type: 3}
