@@ -11,13 +11,14 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
     {
         private Canvas canvas;
         private RectTransform rectransform;
-        private int index = 0;
+        public int index = 0;
         private float counterDelayStart = 0;
         private float doDelayStart = 1f;
         private GameObject gameObjectToCheck;
         private Color32 colorToCheck;
         private bool startToDrag = false;
         private GameObject customerToCheck;
+        private bool exitCustomerCollider = true;
 
         private const string TAG_CHARACTER = "Character";
 
@@ -40,7 +41,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                     rect.height
                 );
 
-                gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(rect.width / 2, 0);
+                //gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(rect.width / 2, 0);
             }
         }
 
@@ -50,7 +51,10 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             GameObject _gameObject = Instantiate(gameObject.transform.parent.gameObject, gameObject.transform);
             _gameObject.transform.GetChild(0).gameObject.name = gameObject.name;
             _gameObject.transform.SetParent(gameObject.transform.parent.parent);
-            _gameObject.transform.SetSiblingIndex(gameObject.transform.GetSiblingIndex());
+            _gameObject.transform.SetSiblingIndex(gameObject.transform.parent.GetSiblingIndex());
+            rectransform.localScale = Vector3.one;
+            _gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
+            _gameObject.transform.GetChild(0).GetComponent<Object>().index = index;
             gameObject.transform.parent.SetParent(canvas.gameObject.transform);
             startToDrag = true;
         }
@@ -106,6 +110,8 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                 {
                     index++;
 
+                    Debug.Log(index);
+
                     if (index >= allColorAvailable.Count)
                     {
                         index = 0;
@@ -118,18 +124,27 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == TAG_CHARACTER)
+            Debug.Log("1 " + collision.gameObject.transform.parent.name);
+
+            if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
             {
+                customerToCheck = collision.gameObject;
                 gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
                 colorToCheck = collision.GetComponent<Customer>().color;
-                customerToCheck = collision.gameObject;
+                exitCustomerCollider = false;
+                Debug.Log( " 2 " +customerToCheck.transform.parent.name);
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            gameObjectToCheck = null;
-            colorToCheck = default;
+            if (collision.gameObject.tag == TAG_CHARACTER)
+            {
+                Debug.Log("ExitColision " + collision.gameObject.transform.parent.name);
+                gameObjectToCheck = null;
+                colorToCheck = default;
+                exitCustomerCollider = true;
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)
