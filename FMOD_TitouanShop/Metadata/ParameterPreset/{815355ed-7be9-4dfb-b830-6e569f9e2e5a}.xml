@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{815355ed-7be9-4dfb-b830-6e569f9e2e5a}">
+		<property name="name">
+			<value>AMB_Level</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1448c7fb-b84b-4562-b1c8-e3e7e4530fd3}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{87568046-a1a3-4c5f-99cb-0083ee869db5}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{87568046-a1a3-4c5f-99cb-0083ee869db5}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>0</value>
+			<value>1</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>50</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{8fc117c9-1f13-4e58-ad2f-4e3baf7d884e}</destination>
+		</relationship>
+	</object>
+	<object class="ADSRModulator" id="{8fc117c9-1f13-4e58-ad2f-4e3baf7d884e}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+		<property name="initialValue">
+			<value>-100</value>
+		</property>
+		<property name="attackTime">
+			<value>0</value>
+		</property>
+		<property name="releaseTime">
+			<value>0</value>
+		</property>
+		<property name="finalValue">
+			<value>-100</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{c723f949-4f5f-47c0-920d-b601b71ef580}">
+		<property name="assetPath">
+			<value>Chara/Chara_UserAngry5.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.68487500000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bf28cd72-8f4a-4d6c-8fef-ab4e981c7618}</destination>
+		</relationship>
+	</object>
+</objects>

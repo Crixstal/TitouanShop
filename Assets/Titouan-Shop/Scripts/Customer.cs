@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using Com.IsartDigital.TitouanShop.TitouanShop;
 using UnityEngine.Pool;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace Com.IsartDigital.TitouanShop
 {
@@ -11,9 +13,13 @@ namespace Com.IsartDigital.TitouanShop
     {
         [SerializeField] private List<Sprite> customerSpriteList = new List<Sprite>();
         [SerializeField] public Bubble bubble; 
+        [SerializeField] private EventReference angry = default;
+        [SerializeField] private float angryTimer = 0f;
         
         [HideInInspector] public GameObject requestedObject;
         [HideInInspector] public Color color = Color.white;
+        
+        private float timer = 0f;
         
         private void Start()
         {
@@ -51,6 +57,24 @@ namespace Com.IsartDigital.TitouanShop
             bubble.requestedObject = requestedObject;
             bubble.color = color;
             bubble.CreateBubble();
+        }
+        
+        private void Update()
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= angryTimer)
+            {
+                timer = 0f;
+                LaunchEventSound(angry);
+            }
+        }
+        
+        public void LaunchEventSound(EventReference eventSound)
+        {
+            EventInstance event_Sound = RuntimeManager.CreateInstance(eventSound);
+            event_Sound.start();
+            event_Sound.release();
         }
     }
 }

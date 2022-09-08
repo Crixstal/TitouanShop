@@ -112,6 +112,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c5563bd61b88cbf41ba97121e09551e4, type: 3}
   - {fileID: 21300000, guid: e291fe623e7859b40a718d67d3254ba1, type: 3}
   bubble: {fileID: 6834431620656650614, guid: 53fbdbbd0e4e94042811bbaf7dbdc1e9, type: 3}
+  angry:
+    Guid:
+      Data1: -698908516
+      Data2: 1269474973
+      Data3: -1636978548
+      Data4: -1579410170
+    Path: event:/Level/Characters/AngryRandomChara
+  angryTimer: 5
   requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &7103695028196244973

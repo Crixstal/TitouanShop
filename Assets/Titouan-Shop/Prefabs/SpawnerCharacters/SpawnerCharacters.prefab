@@ -52,5 +52,6 @@ MonoBehaviour:
   gm: {fileID: 7386762381062257501, guid: 3debd0f897d93ad4e88532b0af086f90, type: 3}
   customer: {fileID: 9216369569556825967, guid: 8d2850bedb327d64f9e43797dc4a5e84, type: 3}
   specialCustomer: {fileID: 9216369569556825967, guid: 5f4b4d2bb58f1664b971ee8800a26547, type: 3}
+  bubble: {fileID: 8826831771145323296, guid: 53fbdbbd0e4e94042811bbaf7dbdc1e9, type: 3}
   spawnTimer: 5
   customerCounter: 0

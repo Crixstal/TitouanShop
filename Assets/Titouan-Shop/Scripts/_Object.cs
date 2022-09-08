@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using FMOD.Studio;
+using FMODUnity;
 
 namespace Com.IsartDigital.TitouanShop
 {
@@ -31,7 +33,6 @@ namespace Com.IsartDigital.TitouanShop
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
             rectransform = transform.parent.GetComponent<RectTransform>();
         }
-
         private void Update()
         {
             counterDelayStart += Time.deltaTime;
@@ -40,10 +41,7 @@ namespace Com.IsartDigital.TitouanShop
             {
                 Rect rect = gameObject.GetComponent<RectTransform>().rect;
 
-                gameObject.GetComponent<BoxCollider2D>().size = new Vector2(
-                    rect.width,
-                    rect.height
-                );
+                gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width, rect.height);
             }
         }
 
@@ -58,6 +56,10 @@ namespace Com.IsartDigital.TitouanShop
             _gameObject.transform.GetChild(0).GetComponent<_Object>().index = index;
             gameObject.transform.parent.SetParent(canvas.gameObject.transform);
             startToDrag = true;
+            
+            EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/Take");
+            event_Sound.start();
+            event_Sound.release();
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -70,6 +72,10 @@ namespace Com.IsartDigital.TitouanShop
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
                 {
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/RightObject");
+                    event_Sound.start();
+                    event_Sound.release();
+                    
                     numberOfObjectAccepted++;
 
                     if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
@@ -83,56 +89,55 @@ namespace Com.IsartDigital.TitouanShop
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
                     }
                     else
-                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
-                    }
 
                     Destroy(customerToCheck);
 
-
                     if (numberOfObjectAccepted == 16)
-                    {
                         SpawnerCharacter.storyDone = false;
-                    }
 
                     if (numberOfObjectAccepted >= 16 &&
-                    SpawnerCharacter.doPhase3 &&
-                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        SpawnerCharacter.doPhase3 &&
+                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
-                    {
                         SpawnerCharacter.storyDone = true;
-
-                    }
 
                     if (!SpawnerCharacter.monsieurLicorne)
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
-                    else { 
+                    else 
+                    { 
                         spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
-                        //SpawnerCharacter.storyDone = true;
-                        //SpawnerCharacter.monsieurLicorne = false;
-
                     }
+                }
+                else
+                {
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/WrongObject");
+                    event_Sound.start();
+                    event_Sound.release();
                 }
             }
             else if (gameObject.name.IndexOf("(") > 0)
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
                 {
-
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/RightObject");
+                    event_Sound.start();
+                    event_Sound.release();
+                    
                     numberOfObjectAccepted++;
 
                     if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
@@ -146,40 +151,31 @@ namespace Com.IsartDigital.TitouanShop
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
                     }
                     else
-                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
-                    }
 
                     Destroy(customerToCheck);
 
                     if (numberOfObjectAccepted == 16)
-                    {
                         SpawnerCharacter.storyDone = false;
-                    }
-
 
                     if (numberOfObjectAccepted >= 16 &&
-                    SpawnerCharacter.doPhase3 &&
-                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        SpawnerCharacter.doPhase3 &&
+                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
-                    {
                         SpawnerCharacter.storyDone = true;
-
-                    }
-
 
                     if (!SpawnerCharacter.monsieurLicorne)
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
@@ -187,16 +183,23 @@ namespace Com.IsartDigital.TitouanShop
                     {
                         spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
-                        //SpawnerCharacter.storyDone = true;
-                        //SpawnerCharacter.monsieurLicorne = false;
-
                     }
+                }
+                else
+                {
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/WrongObject");
+                    event_Sound.start();
+                    event_Sound.release();
                 }
             }
             else
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
                 {
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/RightObject");
+                    event_Sound.start();
+                    event_Sound.release();
+                    
                     numberOfObjectAccepted++;
 
                     if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
@@ -210,39 +213,31 @@ namespace Com.IsartDigital.TitouanShop
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
                     }
                     else
-                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
-                    }
 
                     Destroy(customerToCheck);
 
-
                     if (numberOfObjectAccepted == 16)
-                    {
                         SpawnerCharacter.storyDone = false;
-                    }
 
                     if (numberOfObjectAccepted >= 16 &&
-                    SpawnerCharacter.doPhase3 &&
-                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        SpawnerCharacter.doPhase3 &&
+                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
-                    {
                         SpawnerCharacter.storyDone = true;
-                    }
-
 
                     if (!SpawnerCharacter.monsieurLicorne)
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
@@ -250,10 +245,13 @@ namespace Com.IsartDigital.TitouanShop
                     {
                         spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
                         spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
-                        //SpawnerCharacter.storyDone = true;
-                        //SpawnerCharacter.monsieurLicorne = false;
-
                     }
+                }
+                else
+                {
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/WrongObject");
+                    event_Sound.start();
+                    event_Sound.release();
                 }
             }
 
@@ -279,10 +277,13 @@ namespace Com.IsartDigital.TitouanShop
                         index = 0;
 
                     gameObject.GetComponent<Image>().color = allColorAvailable[index];
+                    
+                    EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/UI/Color");
+                    event_Sound.start();
+                    event_Sound.release(); 
                 }
             }
         }
-
         private void OnTriggerStay2D(Collider2D collision)
         {
             if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
@@ -303,7 +304,6 @@ namespace Com.IsartDigital.TitouanShop
                 exitCustomerCollider = false;
             }
         }
-
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.gameObject.tag == TAG_CHARACTER || collision.gameObject.tag == TAG_SPECIAL_CHARACTER)

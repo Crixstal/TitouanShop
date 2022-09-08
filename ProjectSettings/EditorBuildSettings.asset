@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Titouan-Shop/Scenes/Main_Title.unity
+    guid: 2fc6a5da633d9fa40a238d90f1d407c5
+  - enabled: 1
     path: Assets/Titouan-Shop/Scenes/Main.unity
     guid: 854b7dbaf5527a54caf8055f1d4353dd
+  - enabled: 0
+    path: Assets/Titouan-Shop/Scenes/End_game.unity
+    guid: 4eb66f0e27ea73e489b249945566776a
   m_configObjects: {}
