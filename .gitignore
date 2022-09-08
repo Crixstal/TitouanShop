@@ -239,10 +239,6 @@ ScaffoldingReadMe.txt
 # StyleCop
 StyleCopReport.xml
 
-# Asset meta data should only be ignored when the corresponding asset is also ignored
-![Aa]ssets/**/*.meta
-[Aa]ssets/*.meta
-
 # Files built by Visual Studio
 *_i.c
 *_p.c
