@@ -51,6 +51,7 @@ namespace Com.IsartDigital.TitouanShop
                 
             else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
             {
+                Debug.Log("NewObjectInGameManager");
                 NewObject();
                 newObjectDone = true;
                 addItem = false;

@@ -10,16 +10,11 @@ namespace Com.IsartDigital.TitouanShop
     {
         [SerializeField] private List<Sprite> customerSpriteList = new List<Sprite>();
         
-        [HideInInspector] public GameObject requestedObject;
-        [HideInInspector] public Color color = Color.white;
+        [SerializeField] public GameObject requestedObject;
+        [SerializeField] public Color color = Color.white;
         
         private void Start()
         {
-            Rect rect = GetComponent<RectTransform>().rect;
-
-            GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
-            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
-
             //if (_Object.numberOfObjectAccepted == 0)
             //{
             //    GetComponent<Image>().sprite = customerSpriteList[0];
@@ -33,12 +28,15 @@ namespace Com.IsartDigital.TitouanShop
             //    color = GameManager.allColorAvailable[0];
             //}
 
-
-            GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
+            GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count - 1)];
 
             requestedObject = GameManager.allObjectAvailable[Random.Range(0, GameManager.allObjectAvailable.Count)];
             color = GameManager.allColorAvailable[Random.Range(0, GameManager.allColorAvailable.Count)];
 
+            Rect rect = GetComponent<RectTransform>().rect;
+
+            GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
 
         }
     }

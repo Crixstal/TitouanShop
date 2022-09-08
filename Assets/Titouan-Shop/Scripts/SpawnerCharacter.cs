@@ -54,7 +54,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             counter1 += Time.deltaTime;
             counter2 += Time.deltaTime;
 
-            if (storyDone )
+            if (storyDone)
             {
                 //foreach (var spawner in spawnList)
                 //    spawner.gameObject.SetActive(true);
@@ -115,14 +115,18 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             }
             else if (_Object.numberOfObjectAccepted == 1)
             {
+                //spawnLeft.gameObject.SetActive(true);
+                //spawnRight.gameObject.SetActive(true);
+
                 AddCharacter(spawnLeft,specialCustomer);
                 AddCharacter(spawnRight, specialCustomer);
-
-            }else if (_Object.numberOfObjectAccepted == 3)
-            {
-                AddCharacter(spawnLeft, specialCustomer);
-                AddCharacter(spawnRight, specialCustomer);
                 AddCharacter(spawnMiddle, specialCustomer);
+            }else if (_Object.numberOfObjectAccepted == 4)
+            {
+                AddCharacter(spawnStory, specialCustomer);
+            }else if (_Object.numberOfObjectAccepted == 16)
+            {
+                AddCharacter(spawnStory, specialCustomer);
             }
 
             //if (Object.numberOfObjectAccepted == gm.tutoColor )

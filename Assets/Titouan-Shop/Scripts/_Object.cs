@@ -71,12 +71,14 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
                 {
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
+                    numberOfObjectAccepted++;
+
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
                     {
+                        SpawnerCharacter.storyDone = true;
                         GameManager.addItem = true;
                     }
 
-                    numberOfObjectAccepted++;
 
                     customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
 
@@ -87,12 +89,15 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
                 {
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
-                    {
-                        GameManager.addItem = true;
-                    }
+                  
 
                     numberOfObjectAccepted++;
+
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    {
+                        SpawnerCharacter.storyDone = true;
+                        GameManager.addItem = true;
+                    }
 
                     customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
 
@@ -103,12 +108,14 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
                 {
+                    numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
                     {
+                        SpawnerCharacter.storyDone = true;
                         GameManager.addItem = true;
                     }
-                    numberOfObjectAccepted++;
+
 
                     customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
 

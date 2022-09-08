@@ -140,9 +140,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 7386762381062257501, guid: 3debd0f897d93ad4e88532b0af086f90, type: 3}
   specialCustSpriteList:
-  - {fileID: 21300000, guid: 28ef2dce83eec914796ab813ecec1993, type: 3}
-  - {fileID: 21300000, guid: ff539b87578a4d74088c9360035650fc, type: 3}
-  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
-  - {fileID: 21300000, guid: 5704e1c220bd3cf41bbcb4c3e917b519, type: 3}
+  - {fileID: 21300000, guid: cc694db2cc5f06f41b209e2f85f166bb, type: 3}
+  - {fileID: 21300000, guid: 92257c4af68487141b39b3822b986b02, type: 3}
+  - {fileID: 21300000, guid: 11d25c99954148a42b632ce18cfc1591, type: 3}
+  - {fileID: 21300000, guid: eac840b5ecc609a46a5a7bb58d82192a, type: 3}
+  - {fileID: 21300000, guid: ea53a8dbce8535a468377a307555f3e7, type: 3}
   requestedObject: {fileID: 0}
   color: {r: 1, g: 1, b: 1, a: 1}
