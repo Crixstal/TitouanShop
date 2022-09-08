@@ -10,35 +10,58 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] private SpawnerCharacter counter;
         
         [SerializeField] private List<Color> allColor = new List<Color>();
-        public static List<Color> allColorAvailable = new List<Color>();
-        
         [SerializeField] private List<GameObject> allObject = new List<GameObject>();
+        [SerializeField] private Counter _counter;
+
+        public static List<Color> allColorAvailable = new List<Color>();
         public static List<GameObject> allObjectAvailable = new List<GameObject>();
 
-        [SerializeField] public int tutoColor, tutoObject, endgame;
-        [SerializeField] private int randomTimer;
-        [SerializeField] private int indexCrazyObject;
 
+        [SerializeField] public int tutoColor, tutoObject;
+        [SerializeField] private int randomTimer;
+        [SerializeField] public int indexCrazyObject;
+
+        private bool endgame = false;
         private int indexColor = 0;
         private int indexObject = 0;
+        [HideInInspector] public bool newColorDone = false;
+        [HideInInspector] public bool newObjectDone = false;
         [HideInInspector] public bool crazyObjDone = false;
+        [HideInInspector] public int indexspecialCustomer = 0;
         
+        private float timer = 0f;
+
+        public static bool addItem = false;
+
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
             allObjectAvailable.Add(allObject[indexObject]);
+            _counter.AddObject(allObject[indexObject]);
         }
 
         private void Update()
         {
-            if (counter.customerCounter == tutoColor) // tuto new color
+            if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoColor && !newColorDone) // tuto new color
+            {
                 NewColor();
+                newColorDone = true;
+                addItem = false;
+            }
                 
-            else if (counter.customerCounter == tutoObject) // tuto new object    
+            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
+            {
                 NewObject();
+                newObjectDone = true;
+                addItem = false;
+            }
                 
-            else if (counter.customerCounter > tutoObject && crazyObjDone == false) // random
-                StartCoroutine(WaitCoroutine());
+            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
+            {
+                timer += Time.deltaTime;
+                if (timer >= randomTimer)
+                    RandomAdd();
+            }
                 
             else if (indexObject == indexCrazyObject) // introduce crazy object    
             {
@@ -46,27 +69,25 @@ namespace Com.IsartDigital.TitouanShop
                 crazyObjDone = true;
             }
             
-            else if (crazyObjDone && counter.customerCounter < endgame) // random
-                StartCoroutine(WaitCoroutine());
-                
-            else if (counter.customerCounter >= endgame) // end game
-                allObjectAvailable.Add(allObject[++indexObject]);
+            else if (crazyObjDone && endgame == false) // random
+            {
+                timer += Time.deltaTime;
+                if (timer >= randomTimer)
+                    RandomAdd();            
+            }
         }
-        
-        IEnumerator WaitCoroutine()
-        {
-            yield return new WaitForSeconds(randomTimer);
-            RandomAdd();
-        }
-        
+
         private void NewColor()
         {
             allColorAvailable.Add(allColor[++indexColor]);
+            ++indexspecialCustomer;
         }
         
         private void NewObject()
         {
             allObjectAvailable.Add(allObject[++indexObject]);
+            ++indexspecialCustomer;
+            //addSur l'etagere
         }
         
         private void RandomAdd()
@@ -84,10 +105,18 @@ namespace Com.IsartDigital.TitouanShop
             switch (randomNb)
             {
                 case 0:
-                    allColorAvailable.Add(allColor[++indexColor]);
+                    if (indexColor < allColorAvailable.Count - 1)
+                    {
+                        allColorAvailable.Add(allColor[++indexColor]);
+                        timer = 0f;
+                    }
                     break;
                 case 1:
-                    allObjectAvailable.Add(allObject[++indexObject]);
+                    if (indexObject < allObjectAvailable.Count - 1)
+                    {
+                        allObjectAvailable.Add(allObject[++indexObject]);
+                        timer = 0f;
+                    }
                     break;
                 default:
                     break;
