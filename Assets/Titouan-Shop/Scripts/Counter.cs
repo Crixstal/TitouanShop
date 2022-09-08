@@ -35,7 +35,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         }
 
         [ContextMenu("AddObject")]
-        private void AddObject(/*GameObject _object*/)
+        public void AddObject(GameObject _object)
         {
             if (transform.GetChild(index).childCount == 4)
             {
@@ -54,7 +54,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
                 }
             }
 
-            Instantiate(transform.GetChild(0).GetChild(0).gameObject, actualRow.transform);
+            Instantiate(_object, actualRow.transform);
         }
     }
 }

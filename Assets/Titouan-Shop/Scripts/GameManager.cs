@@ -11,9 +11,11 @@ namespace Com.IsartDigital.TitouanShop
         
         [SerializeField] private List<Color> allColor = new List<Color>();
         [SerializeField] private List<GameObject> allObject = new List<GameObject>();
-        
+        [SerializeField] private Counter _counter;
+
         public static List<Color> allColorAvailable = new List<Color>();
         public static List<GameObject> allObjectAvailable = new List<GameObject>();
+
 
         [SerializeField] public int tutoColor, tutoObject;
         [SerializeField] private int randomTimer;
@@ -29,27 +31,32 @@ namespace Com.IsartDigital.TitouanShop
         
         private float timer = 0f;
 
+        public static bool addItem = false;
+
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
             allObjectAvailable.Add(allObject[indexObject]);
+            _counter.AddObject(allObject[indexObject]);
         }
 
         private void Update()
         {
-            if (counter.customerCounter == tutoColor) // tuto new color
+            if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoColor && !newColorDone) // tuto new color
             {
                 NewColor();
                 newColorDone = true;
+                addItem = false;
             }
                 
-            else if (counter.customerCounter == tutoObject) // tuto new object    
+            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
             {
                 NewObject();
                 newObjectDone = true;
+                addItem = false;
             }
                 
-            else if (counter.customerCounter > tutoObject && crazyObjDone == false) // random
+            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
             {
                 timer += Time.deltaTime;
                 if (timer >= randomTimer)
@@ -80,6 +87,7 @@ namespace Com.IsartDigital.TitouanShop
         {
             allObjectAvailable.Add(allObject[++indexObject]);
             ++indexspecialCustomer;
+            //addSur l'etagere
         }
         
         private void RandomAdd()
