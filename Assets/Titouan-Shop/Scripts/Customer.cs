@@ -25,8 +25,13 @@ namespace Com.IsartDigital.TitouanShop
         {
             if(SpawnerCharacter.doPhase3)
                 GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 8)];
-            else
+            else if (!SpawnerCharacter.doPhase3 && !SpecialCustomer.afterLicorne)
                 GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 9)];
+            else if (SpecialCustomer.afterLicorne)
+            {
+                Debug.Log("aniamux");
+                GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
+            }
 
             if (!SpawnerCharacter.ajoutObject && !SpawnerCharacter.ajoutColor)
             {

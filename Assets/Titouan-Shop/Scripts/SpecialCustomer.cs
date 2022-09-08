@@ -14,6 +14,8 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] public GameObject requestedObject;
         [SerializeField] public Color color = Color.white;
 
+        public static bool afterLicorne;
+
         private void Start()
         {
             if (_Object.numberOfObjectAccepted == 0)
@@ -64,6 +66,7 @@ namespace Com.IsartDigital.TitouanShop
             {
                 SpawnerCharacter.storyDone = true;
                 SpawnerCharacter.monsieurLicorne = false;
+                afterLicorne = true;
             }
         }
     }

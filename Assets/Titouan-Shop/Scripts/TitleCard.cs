@@ -12,10 +12,20 @@ namespace Com.IsartDigital.TitouanShop
 
         [SerializeField] private static string nameMainScene = "Main";
 
+        private void Awake()
+        {
+#if UNITY_STANDALONE_WIN
+
+             Screen.SetResolution(600,2000, true);
+            Screen.orientation = ScreenOrientation.Portrait;
+
+#endif
+
+        }
         void Start()
         {
             btnPlay.onClick.AddListener(Play);
-            btnQuit.onClick.AddListener(Play);
+            btnQuit.onClick.AddListener(Quit);
         }
 
         private void Play()
