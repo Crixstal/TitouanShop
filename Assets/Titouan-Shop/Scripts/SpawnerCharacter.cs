@@ -19,6 +19,15 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         private List<Transform> spawnList = new List<Transform>();
         [HideInInspector] public int customerCounter = 0;
 
+        private float counter;
+        private float counter1;
+        private float counter2;
+
+
+        private bool spawnCustomer = true;
+        private bool spawnCustomer1 = true;
+        private bool spawnCustomer2 = true;
+
         private void Start()
         {
             spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
@@ -34,21 +43,65 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         private void Update()
         {
             CheckPhase();
+
+            counter += Time.deltaTime;
+            counter1 += Time.deltaTime;
+            counter2 += Time.deltaTime;
             
-            foreach (var spawner in spawnList)
+            //foreach (var spawner in spawnList)
+            //{
+            //    if (spawner.childCount == 0)
+            //    {
+            //        AddCharacter(spawner);
+            //    }
+            //}
+
+            if (counter >= spawnTimer && spawnCustomer)
             {
-                if (spawner.childCount == 0)
-                    StartCoroutine(WaitCoroutine(spawner));
+                AddCharacter(spawnLeft);
+                spawnCustomer = false;
+            }
+
+            if (counter1 >= spawnTimer && spawnCustomer1)
+            {
+                AddCharacter(spawnMiddle);
+                spawnCustomer1 = false;
+            }
+
+            if (counter2 >= spawnTimer && spawnCustomer2)
+            {
+                AddCharacter(spawnRight);
+                spawnCustomer2 = false;
+            }
+        }
+
+        public void ResetTimer(GameObject spawner)
+        {
+
+            if (spawner.name == spawnLeft.name)
+            {
+                counter = 0f;
+                spawnCustomer = true;
+            }
+            else if (spawner.name == spawnMiddle.name)
+            {
+                counter1 = 0f;
+                spawnCustomer1 = true;
+            }
+            else if (spawner.name == spawnRight.name)
+            {
+                counter2 = 0f;
+                spawnCustomer2 = true;
             }
         }
         
-        IEnumerator WaitCoroutine(Transform spawner)
-        {
-            yield return new WaitForSeconds(spawnTimer);
+        //IEnumerator WaitCoroutine(Transform spawner)
+        //{
+        //    yield return new WaitForSeconds(spawnTimer);
 
-            if (spawner.childCount == 0)
-                AddCharacter(spawner);
-        }
+        //    if (spawner.childCount == 0)
+        //        AddCharacter(spawner);
+        //}
 
         private void AddCharacter(Transform spawner)
         {
@@ -68,20 +121,20 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             
             else if (customerCounter == gm.tutoObject)
             {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
+                //foreach (var spawner in spawnList)
+                //    spawner.gameObject.SetActive(false);
             }
             
             else if (gm.crazyObjDone)
             {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
+                //foreach (var spawner in spawnList)
+                //    spawner.gameObject.SetActive(false);
             }
             
             else if (customerCounter >= gm.endgame)
             {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
+                //foreach (var spawner in spawnList)
+                //    spawner.gameObject.SetActive(false);
             }
         }
     }

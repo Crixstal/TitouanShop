@@ -70,6 +70,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
                 {
                     Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -78,6 +79,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
                 {
                     Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -86,6 +88,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
                 {
                     Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -122,15 +125,12 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            Debug.Log("1 " + collision.gameObject.transform.parent.name);
-
             if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
             {
                 customerToCheck = collision.gameObject;
                 gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
                 colorToCheck = collision.GetComponent<Customer>().color;
                 exitCustomerCollider = false;
-                Debug.Log( " 2 " +customerToCheck.transform.parent.name);
             }
         }
 
@@ -138,7 +138,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         {
             if (collision.gameObject.tag == TAG_CHARACTER)
             {
-                Debug.Log("ExitColision " + collision.gameObject.transform.parent.name);
                 gameObjectToCheck = null;
                 colorToCheck = default;
                 exitCustomerCollider = true;
