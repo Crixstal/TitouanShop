@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1474117420}
   - component: {fileID: 1474117419}
   m_Layer: 5
-  m_Name: Eventail
+  m_Name: Lunette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1763800442, guid: 49dadb1720f6f97479409781bbe2e938, type: 3}
+  m_Sprite: {fileID: 631542655, guid: 49dadb1720f6f97479409781bbe2e938, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 1284327019675372842}
   - component: {fileID: 3825651089009506308}
   m_Layer: 5
-  m_Name: Eventail
+  m_Name: Lunette
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -105836763, guid: 3f8cbe803b48b9546b2827ccaba20925, type: 3}
+  m_Sprite: {fileID: 1760841247, guid: 3f8cbe803b48b9546b2827ccaba20925, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
