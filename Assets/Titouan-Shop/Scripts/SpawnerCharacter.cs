@@ -25,14 +25,15 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         private bool spawnCustomer = true;
         private bool spawnCustomer1 = true;
         private bool spawnCustomer2 = true;
-        private bool storyDone = false;
+        
+        static public bool storyDone = false;
         
         private void Start()
         {
             spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
             spawnLeft = transform.GetChild(0).transform.Find("LeftSpawn");
             spawnMiddle = transform.GetChild(0).transform.Find("MiddleSpawn");
-            spawnStory = transform.Find("StorySpawn");
+            spawnStory = transform.GetChild(1).transform.Find("StorySpawn");
             
             spawnList.Add(spawnRight);
             spawnList.Add(spawnLeft);
@@ -50,23 +51,29 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             counter += Time.deltaTime;
             counter1 += Time.deltaTime;
             counter2 += Time.deltaTime;
-            
-            if (counter >= spawnTimer && spawnCustomer)
-            {
-                AddCharacter(spawnLeft);
-                spawnCustomer = false;
-            }
 
-            if (counter1 >= spawnTimer && spawnCustomer1)
+            if (storyDone)
             {
-                AddCharacter(spawnMiddle);
-                spawnCustomer1 = false;
-            }
+                foreach (var spawner in spawnList)
+                    spawner.gameObject.SetActive(true);
+                
+                if (counter >= spawnTimer && spawnCustomer)
+                {
+                    AddCharacter(spawnLeft);
+                    spawnCustomer = false;
+                }
 
-            if (counter2 >= spawnTimer && spawnCustomer2)
-            {
-                AddCharacter(spawnRight);
-                spawnCustomer2 = false;
+                if (counter1 >= spawnTimer && spawnCustomer1)
+                {
+                    AddCharacter(spawnMiddle);
+                    spawnCustomer1 = false;
+                }
+
+                if (counter2 >= spawnTimer && spawnCustomer2)
+                {
+                    AddCharacter(spawnRight);
+                    spawnCustomer2 = false;
+                }
             }
         }
 

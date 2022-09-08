@@ -66,8 +66,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
             Color32 actualColor = gameObject.GetComponent<Image>().color;
 
-            Debug.Log(gameObjectToCheck);
-
             if (gameObject.name.IndexOf(" ") > 0)
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
