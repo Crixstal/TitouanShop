@@ -102,6 +102,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fdf23ba54e2e2bb46b543d1054d412d9, type: 3}
   - {fileID: 21300000, guid: fd07aa715498fd04d9b6806439a04e13, type: 3}
   - {fileID: 21300000, guid: 33d509a226cb84843bc915e7ae2ea667, type: 3}
+  - {fileID: 21300000, guid: 8d7d0dca080dab94f9a1f5be3a9e08ed, type: 3}
+  - {fileID: 21300000, guid: b85e363a37d6ffc449b5f6ab0de59e39, type: 3}
+  - {fileID: 21300000, guid: 84ce601ea3461a242ae950023de6a394, type: 3}
+  - {fileID: 21300000, guid: 51baf48a078eda941a61bf7d6c18fe60, type: 3}
+  - {fileID: 21300000, guid: bad3ad2a6fa2ae64c9f6b300eda690ce, type: 3}
+  - {fileID: 21300000, guid: 2119a3f22f09375438dc4d2d2e257891, type: 3}
+  - {fileID: 21300000, guid: f3b93204766a88c429ba8c35632e16a5, type: 3}
+  - {fileID: 21300000, guid: c5563bd61b88cbf41ba97121e09551e4, type: 3}
+  - {fileID: 21300000, guid: e291fe623e7859b40a718d67d3254ba1, type: 3}
   bubble: {fileID: 6834431620656650614, guid: 53fbdbbd0e4e94042811bbaf7dbdc1e9, type: 3}
   requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}

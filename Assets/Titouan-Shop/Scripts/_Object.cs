@@ -22,6 +22,7 @@ namespace Com.IsartDigital.TitouanShop
 
         private const string TAG_CHARACTER = "Character";
         private const string TAG_SPECIAL_CHARACTER = "SpecialCharacter";
+        private static SpawnerCharacter spawnerCharacter;
 
         public static int numberOfObjectAccepted = 0;
 
@@ -43,14 +44,11 @@ namespace Com.IsartDigital.TitouanShop
                     rect.width,
                     rect.height
                 );
-
-                //gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(rect.width / 2, 0);
             }
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            //GameObject __gameObject = Instantiate(transform.parent.gameObject,transform.parent);
             GameObject _gameObject = Instantiate(gameObject.transform.parent.gameObject, gameObject.transform);
             _gameObject.transform.GetChild(0).gameObject.name = gameObject.name;
             _gameObject.transform.SetParent(gameObject.transform.parent.parent);
@@ -74,35 +72,125 @@ namespace Com.IsartDigital.TitouanShop
                 {
                     numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
                     {
-                        SpawnerCharacter.storyDone = true;
-                        GameManager.addItem = true;
+                        if (numberOfObjectAccepted == 5)
+                        {
+                            SpawnerCharacter.storyDone = true;
+                            GameManager.addItem = true;
+                        }
+
+                        Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                    }
+                    else
+                    {
+                        Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
                     }
 
-
-                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
-
                     Destroy(customerToCheck);
+
+
+                    if (numberOfObjectAccepted == 16)
+                    {
+                        SpawnerCharacter.storyDone = false;
+                    }
+
+                    if (numberOfObjectAccepted >= 16 &&
+                    SpawnerCharacter.doPhase3 &&
+                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterRaisin();
+                    }
+
+                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterLicorne();
+                    }
+
+                    if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
+                    {
+                        SpawnerCharacter.storyDone = true;
+
+                    }
+
+                    if (!SpawnerCharacter.monsieurLicorne)
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                    else { 
+                        spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                        //SpawnerCharacter.storyDone = true;
+                        //SpawnerCharacter.monsieurLicorne = false;
+
+                    }
                 }
             }
             else if (gameObject.name.IndexOf("(") > 0)
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
                 {
-                  
 
                     numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
                     {
-                        SpawnerCharacter.storyDone = true;
-                        GameManager.addItem = true;
+                        if (numberOfObjectAccepted == 5)
+                        {
+                            SpawnerCharacter.storyDone = true;
+                            GameManager.addItem = true;
+                        }
+
+                        Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                    }
+                    else
+                    {
+                        Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
                     }
 
-                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
-
                     Destroy(customerToCheck);
+
+                    if (numberOfObjectAccepted == 16)
+                    {
+                        SpawnerCharacter.storyDone = false;
+                    }
+
+
+                    if (numberOfObjectAccepted >= 16 &&
+                    SpawnerCharacter.doPhase3 &&
+                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterRaisin();
+                    }
+
+                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterLicorne();
+                    }
+
+                    if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
+                    {
+                        SpawnerCharacter.storyDone = true;
+
+                    }
+
+
+                    if (!SpawnerCharacter.monsieurLicorne)
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                    else
+                    {
+                        spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                        //SpawnerCharacter.storyDone = true;
+                        //SpawnerCharacter.monsieurLicorne = false;
+
+                    }
                 }
             }
             else
@@ -111,16 +199,61 @@ namespace Com.IsartDigital.TitouanShop
                 {
                     numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER)
+                    {
+                        if (numberOfObjectAccepted == 5)
+                        {
+                            SpawnerCharacter.storyDone = true;
+                            GameManager.addItem = true;
+                        }
+
+                        Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                    }
+                    else
+                    {
+                        Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
+                    }
+
+                    Destroy(customerToCheck);
+
+
+                    if (numberOfObjectAccepted == 16)
+                    {
+                        SpawnerCharacter.storyDone = false;
+                    }
+
+                    if (numberOfObjectAccepted >= 16 &&
+                    SpawnerCharacter.doPhase3 &&
+                    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterRaisin();
+                    }
+
+                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    {
+                        spawnerCharacter.addCharacterLicorne();
+                    }
+
+                    if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
                     {
                         SpawnerCharacter.storyDone = true;
-                        GameManager.addItem = true;
                     }
 
 
-                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
+                    if (!SpawnerCharacter.monsieurLicorne)
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                    else
+                    {
+                        spawnerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
+                        spawnerCharacter.ResetTimer(customerToCheck.transform.parent.gameObject);
+                        //SpawnerCharacter.storyDone = true;
+                        //SpawnerCharacter.monsieurLicorne = false;
 
-                    Destroy(customerToCheck);
+                    }
                 }
             }
 
@@ -155,6 +288,7 @@ namespace Com.IsartDigital.TitouanShop
             if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
             {
                 customerToCheck = collision.gameObject;
+                spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
                 gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
                 colorToCheck = collision.GetComponent<Customer>().color;
                 exitCustomerCollider = false;
@@ -163,6 +297,7 @@ namespace Com.IsartDigital.TitouanShop
             if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER && exitCustomerCollider)
             {
                 customerToCheck = collision.gameObject;
+                spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
                 gameObjectToCheck = collision.GetComponent<SpecialCustomer>().requestedObject;
                 colorToCheck = collision.GetComponent<SpecialCustomer>().color;
                 exitCustomerCollider = false;
@@ -171,14 +306,7 @@ namespace Com.IsartDigital.TitouanShop
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == TAG_CHARACTER)
-            {
-                gameObjectToCheck = null;
-                colorToCheck = default;
-                exitCustomerCollider = true;
-            }
-
-            if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER)
+            if (collision.gameObject.tag == TAG_CHARACTER || collision.gameObject.tag == TAG_SPECIAL_CHARACTER)
             {
                 gameObjectToCheck = null;
                 colorToCheck = default;

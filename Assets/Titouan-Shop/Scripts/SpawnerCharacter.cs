@@ -12,12 +12,15 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] private GameObject specialCustomer;
         [SerializeField] private GameObject bubble;
         [SerializeField] private float spawnTimer = 0f;
-        
-        private Transform spawnRight;
-        private Transform spawnLeft;
-        private Transform spawnMiddle;
-        private Transform spawnStory;
-        
+        [SerializeField] public Transform pourMonsieurLicorne;
+
+        public static Transform spawnRight;
+        public static Transform spawnLeft;
+        public static Transform spawnMiddle;
+        public static Transform spawnStory;
+
+        public static bool doPhase3 = true;
+
         private Transform bubbleRight;
         private Transform bubbleMiddle;
         private Transform bubbleLeft;
@@ -32,10 +35,19 @@ namespace Com.IsartDigital.TitouanShop
         private bool spawnCustomer = true;
         private bool spawnCustomer1 = true;
         private bool spawnCustomer2 = true;
+
         
         static public bool storyDone = false;
+        static public bool monsieurLicorne = false;
         public static bool spawn3Customer = false;
-        
+
+        private float timer = 0f;
+        private float limitTimer;
+        private bool setLimitTimer = true;
+
+        public static bool ajoutObject = false;
+        public static bool ajoutColor = false;
+
         private void Start()
         {
             spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
@@ -66,27 +78,148 @@ namespace Com.IsartDigital.TitouanShop
 
             if (storyDone)
             {
-                //foreach (var spawner in spawnList)
-                //    spawner.gameObject.SetActive(true);
-                
+                float percentage = 0.10f;
+                float randomLimitmin = 6f;
+                float randomLimitmax = 10f;
+
                 if (counter >= spawnTimer && spawnCustomer)
                 {
-                    AddCharacter(spawnLeft,customer);
+                    timer++;
+
+                    if (!doPhase3)
+                    {
+                        if (setLimitTimer)
+                        {
+                            limitTimer = Random.Range(randomLimitmin, randomLimitmax);
+                        }
+
+                        if (timer >= limitTimer)
+                        {
+                            float random = Random.value;
+
+                            if (gm.indexColor <= gm.allColor.Count - 1)
+                            {
+                                if (random >= percentage)
+                                {
+                                    gm.NewObject();
+
+                                    ajoutObject = true;
+                                }
+                                else if (random < percentage)
+                                {
+                                    gm.NewColor();
+                                    ajoutColor = true;
+                                }
+                            }
+                            else
+                            {
+                                gm.NewObject();
+
+                                ajoutObject = true;
+                            }
+
+                            timer = 0f;
+                        }
+
+                    }
+
+                    AddCharacter(spawnLeft, customer);
                     spawnCustomer = false;
                 }
 
                 if (counter1 >= spawnTimer && spawnCustomer1)
                 {
-                    AddCharacter(spawnMiddle,customer);
+                    timer++;
+
+                    if (!doPhase3)
+                    {
+                        if (setLimitTimer)
+                        {
+                            limitTimer = Random.Range(randomLimitmin, randomLimitmax);
+                        }
+
+                        if (timer >= limitTimer)
+                        {
+                            float random = Random.value;
+
+                            if (gm.indexColor <= gm.allColor.Count - 1)
+                            {
+                                if (random >= percentage)
+                                {
+                                    gm.NewObject();
+
+                                    ajoutObject = true;
+                                }
+                                else if (random < percentage)
+                                {
+                                    gm.NewColor();
+
+                                    ajoutColor = true;
+                                }
+                            }
+                            else
+                            {
+                                gm.NewObject();
+
+                                ajoutObject = true;
+                            }
+
+                            timer = 0f;
+                        }
+
+                    }
+                    AddCharacter(spawnMiddle, customer);
                     spawnCustomer1 = false;
                 }
 
                 if (counter2 >= spawnTimer && spawnCustomer2)
                 {
-                    AddCharacter(spawnRight,customer);
+                    timer++;
+
+                    if (!doPhase3)
+                    {
+                        if (setLimitTimer)
+                        {
+                            limitTimer = Random.Range(randomLimitmin, randomLimitmax);
+                        }
+
+                        if (timer >= limitTimer)
+                        {
+                            float random = Random.value;
+
+                            if (gm.indexColor <= gm.allColor.Count - 1)
+                            {
+                                if (random >= percentage)
+                                {
+                                    gm.NewObject();
+
+                                    ajoutObject = true;
+                                }
+                                else if (random < percentage)
+                                {
+                                    gm.NewColor();
+
+                                    ajoutColor = true;
+                                }
+                            }
+                            else
+                            {
+                                gm.NewObject();
+
+                                ajoutObject = true;
+                            }
+
+                            timer = 0f;
+                        }
+
+                    }
+
+                    AddCharacter(spawnRight, customer);
                     spawnCustomer2 = false;
                 }
             }
+
+            
         }
 
         public void ResetTimer(GameObject spawner)
@@ -117,14 +250,16 @@ namespace Com.IsartDigital.TitouanShop
             if (spawner.name == "LeftSpawn")
                 myBubble = Instantiate(bubble, bubbleLeft).GetComponent<Bubble>();
             
-            else if (spawner.name == "MiddleSpawn" || spawner.name == "StorySpawn")
+            else if (spawner.name == "MiddleSpawn" || spawner.name == "StorySpawn" || spawner.name == "PourMonsieurLicorne")
                 myBubble = Instantiate(bubble, bubbleMiddle).GetComponent<Bubble>();
             
             else if (spawner.name == "RightSpawn")
                 myBubble = Instantiate(bubble, bubbleRight).GetComponent<Bubble>();
-            
+
             if (customer.name == "Customer")
+            {
                 Instantiate(customer, spawner).GetComponent<Customer>().bubble = myBubble;
+            }
             
             if (customer.name == "SpecialCustomer")
                 Instantiate(customer, spawner).GetComponent<SpecialCustomer>().bubble = myBubble;
@@ -150,10 +285,13 @@ namespace Com.IsartDigital.TitouanShop
             }else if (_Object.numberOfObjectAccepted == 4)
             {
                 AddCharacter(spawnStory, specialCustomer);
-            }else if (_Object.numberOfObjectAccepted == 16)
-            {
-                AddCharacter(spawnStory, specialCustomer);
             }
+
+            //Debug.Log(_Object.numberOfObjectAccepted);
+            //Debug.Log(doPhase3);
+            //Debug.Log(spawnLeft.childCount);
+            //Debug.Log(spawnRight.childCount);
+            //Debug.Log(spawnMiddle.childCount);
 
             //if (Object.numberOfObjectAccepted == gm.tutoColor )
             //{
@@ -192,6 +330,21 @@ namespace Com.IsartDigital.TitouanShop
             //    if (spawnStory.childCount == 0)
             //        Instantiate(specialCustomer, spawnStory);
             //}
+        }
+
+        public void addCharacterRaisin()
+        {
+            gm.AddRaisin();
+            AddCharacter(spawnStory, specialCustomer);
+            doPhase3 = false;
+        }
+
+        public void addCharacterLicorne()
+        {
+            gm.AddRaisin();
+            AddCharacter(pourMonsieurLicorne, specialCustomer);
+            //AddCharacter(spawnStory, specialCustomer);
+            doPhase3 = false;
         }
     }
 }

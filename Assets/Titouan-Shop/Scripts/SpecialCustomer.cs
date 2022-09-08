@@ -11,8 +11,8 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] private List<Sprite> specialCustSpriteList = new List<Sprite>();
         [SerializeField] public Bubble bubble; 
 
-        [HideInInspector] public GameObject requestedObject;
-        [HideInInspector] public Color color = Color.white;
+        [SerializeField] public GameObject requestedObject;
+        [SerializeField] public Color color = Color.white;
 
         private void Start()
         {
@@ -33,10 +33,15 @@ namespace Com.IsartDigital.TitouanShop
                 GetComponent<Image>().sprite = specialCustSpriteList[2];
                 requestedObject = GameManager.allObjectAvailable[0];
                 color = GameManager.allColorAvailable[1];
-            }else if (_Object.numberOfObjectAccepted == 16)
+            }else if (_Object.numberOfObjectAccepted >= 16 && _Object.numberOfObjectAccepted <= 19)
             {
                 GetComponent<Image>().sprite = specialCustSpriteList[3];
                 requestedObject = GameManager.allObjectAvailable[1];
+                color = GameManager.allColorAvailable[0];
+            }else if (SpawnerCharacter.monsieurLicorne)
+            {
+                GetComponent<Image>().sprite = specialCustSpriteList[4];
+                requestedObject = GameManager.allObjectAvailable[4];
                 color = GameManager.allColorAvailable[0];
             }
 
@@ -48,6 +53,15 @@ namespace Com.IsartDigital.TitouanShop
             bubble.requestedObject = requestedObject;
             bubble.color = color;
             bubble.CreateBubble();
+        }
+
+        private void OnDestroy()
+        {
+            if (GetComponent<Image>().sprite.name == "Chara_spe_4_v1")
+            {
+                SpawnerCharacter.storyDone = true;
+                SpawnerCharacter.monsieurLicorne = false;
+            }
         }
     }
 }

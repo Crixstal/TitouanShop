@@ -17,10 +17,31 @@ namespace Com.IsartDigital.TitouanShop
         
         private void Start()
         {
-            GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count - 1)];
+            if(SpawnerCharacter.doPhase3)
+                GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 8)];
+            else
+                GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 9)];
 
-            requestedObject = GameManager.allObjectAvailable[Random.Range(0, GameManager.allObjectAvailable.Count)];
-            color = GameManager.allColorAvailable[Random.Range(0, GameManager.allColorAvailable.Count)];
+            if (!SpawnerCharacter.ajoutObject && !SpawnerCharacter.ajoutColor)
+            {
+                requestedObject = GameManager.allObjectAvailable[Random.Range(0, GameManager.allObjectAvailable.Count)];
+                color = GameManager.allColorAvailable[Random.Range(0, GameManager.allColorAvailable.Count)];
+            }
+            else if (SpawnerCharacter.ajoutColor)
+            {
+                requestedObject = GameManager.allObjectAvailable[Random.Range(0, GameManager.allObjectAvailable.Count)];
+                color = GameManager.allColorAvailable[GameManager.allColorAvailable.Count-1];
+
+                SpawnerCharacter.ajoutColor = false;
+
+            }
+            else if (SpawnerCharacter.ajoutObject)
+            {
+                requestedObject = GameManager.allObjectAvailable[GameManager.allObjectAvailable.Count - 1];
+                color = GameManager.allColorAvailable[Random.Range(0, GameManager.allColorAvailable.Count)];
+
+                SpawnerCharacter.ajoutObject = false;
+            }
 
             Rect rect = GetComponent<RectTransform>().rect;
 

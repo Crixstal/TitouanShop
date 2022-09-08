@@ -7,11 +7,11 @@ namespace Com.IsartDigital.TitouanShop
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private SpawnerCharacter counter;
+        [SerializeField] public Counter counter;
         
-        [SerializeField] private List<Color> allColor = new List<Color>();
-        [SerializeField] private List<GameObject> allObject = new List<GameObject>();
-        [SerializeField] private Counter _counter;
+        [SerializeField] public List<Color> allColor = new List<Color>();
+        [SerializeField] public List<GameObject> allObject = new List<GameObject>();
+        [SerializeField] public Counter _counter;
 
         public static List<Color> allColorAvailable = new List<Color>();
         public static List<GameObject> allObjectAvailable = new List<GameObject>();
@@ -22,14 +22,14 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] public int indexCrazyObject;
 
         private bool endgame = false;
-        private int indexColor = 0;
-        private int indexObject = 0;
+        public int indexColor = 0;
+        public int indexObject = 0;
         [HideInInspector] public bool newColorDone = false;
         [HideInInspector] public bool newObjectDone = false;
         [HideInInspector] public bool crazyObjDone = false;
         [HideInInspector] public int indexspecialCustomer = 0;
         
-        private float timer = 0f;
+
 
         public static bool addItem = false;
 
@@ -52,76 +52,93 @@ namespace Com.IsartDigital.TitouanShop
             else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
             {
                 Debug.Log("NewObjectInGameManager");
-                NewObject();
                 newObjectDone = true;
                 addItem = false;
             }
-                
+            
+            
+
             else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
             {
-                timer += Time.deltaTime;
-                if (timer >= randomTimer)
-                    RandomAdd();
+                //timer += Time.deltaTime;
+                //if (timer >= randomTimer)
+                    //RandomAdd();
             }
+
+           
                 
-            else if (indexObject == indexCrazyObject) // introduce crazy object    
-            {
-                NewObject();
-                crazyObjDone = true;
-            }
+            //else if (indexObject == indexCrazyObject) // introduce crazy object    
+            //{
+            //    NewObject();
+            //    crazyObjDone = true;
+            //}
             
-            else if (crazyObjDone && endgame == false) // random
-            {
-                timer += Time.deltaTime;
-                if (timer >= randomTimer)
-                    RandomAdd();            
-            }
+            //else if (crazyObjDone && endgame == false) // random
+            //{
+            //    timer += Time.deltaTime;
+            //    if (timer >= randomTimer)
+            //        RandomAdd();            
+            //}
         }
 
-        private void NewColor()
+        public void AddRaisin()
+        {
+            NewObject();
+        }
+
+        public void NewColor()
         {
             allColorAvailable.Add(allColor[++indexColor]);
-            ++indexspecialCustomer;
         }
         
-        private void NewObject()
+        public void NewObject()
         {
             allObjectAvailable.Add(allObject[++indexObject]);
             ++indexspecialCustomer;
             //addSur l'etagere
-        }
-        
-        private void RandomAdd()
-        {
-            int randomNb = 0;
-            float rand = Random.value;
-            
-            if (rand >= 0f && rand < 0.25f)
-                randomNb = 0;
-            else if (rand >= 0.25f && rand < 0.5f)
-                randomNb = 1;
-            else if (rand >= 0.5f)
-                randomNb = 2;
-            
-            switch (randomNb)
+            counter.AddObject(allObject[indexObject]);
+
+            Debug.Log(indexspecialCustomer);
+
+            if (indexspecialCustomer == 3)
             {
-                case 0:
-                    if (indexColor < allColorAvailable.Count - 1)
-                    {
-                        allColorAvailable.Add(allColor[++indexColor]);
-                        timer = 0f;
-                    }
-                    break;
-                case 1:
-                    if (indexObject < allObjectAvailable.Count - 1)
-                    {
-                        allObjectAvailable.Add(allObject[++indexObject]);
-                        timer = 0f;
-                    }
-                    break;
-                default:
-                    break;
+                Debug.Log("Lourd");
+                SpawnerCharacter.storyDone = false;
+                SpawnerCharacter.monsieurLicorne = true;
             }
         }
+        
+        //private void RandomAdd()
+        //{
+        //    int randomNb = 0;
+        //    float rand = Random.value;
+            
+        //    if (rand >= 0f && rand < 0.25f)
+        //        randomNb = 0;
+        //    else if (rand >= 0.25f && rand < 0.5f)
+        //        randomNb = 1;
+        //    else if (rand >= 0.5f)
+        //        randomNb = 2;
+            
+        //    switch (randomNb)
+        //    {
+        //        case 0:
+        //            if (indexColor < allColorAvailable.Count - 1)
+        //            {
+        //                allColorAvailable.Add(allColor[++indexColor]);
+        //                timer = 0f;
+        //            }
+        //            break;
+        //        case 1:
+        //            if (indexObject < allObjectAvailable.Count - 1)
+        //            {
+        //                allObjectAvailable.Add(allObject[++indexObject]);
+        //                timer = 0f;
+        //            }
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
     }
 }
