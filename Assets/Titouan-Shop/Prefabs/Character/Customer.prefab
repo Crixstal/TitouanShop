@@ -91,12 +91,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f750d942b8de734390a5507df32845d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 7386762381062257501, guid: 3debd0f897d93ad4e88532b0af086f90, type: 3}
-  requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
-  color: {r: 1, g: 1, b: 1, a: 1}
   customerSpriteList:
   - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
   - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  - {fileID: 21300000, guid: ab5c347dd721921429bb2ddfe02104a0, type: 3}
+  requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &7103695028196244973
 BoxCollider2D:
   m_ObjectHideFlags: 0

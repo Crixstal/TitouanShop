@@ -49,9 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89d1395bd89ecd4b9b99147f0cf2ca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allObjects:
-  - {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
-  - {fileID: 5866003693539871061, guid: dba86c03dbc4c0d45bce08c4e9db0945, type: 3}
-  - {fileID: 6180457550587526360, guid: 3a64183d0022fda4ca20a144e4fb0e2e, type: 3}
-  - {fileID: 4716634276141669743, guid: d923e42770e0dc0488ee9e8c7ea057c6, type: 3}
-  character: {fileID: 9216369569556825967, guid: 5b0f71a31b828554f93a3fcfba16dd40, type: 3}
+  gm: {fileID: 7386762381062257501, guid: 3debd0f897d93ad4e88532b0af086f90, type: 3}
+  customer: {fileID: 9216369569556825967, guid: 8d2850bedb327d64f9e43797dc4a5e84, type: 3}
+  specialCustomer: {fileID: 9216369569556825967, guid: 5f4b4d2bb58f1664b971ee8800a26547, type: 3}
+  spawnTimer: 5
+  customerCounter: 0

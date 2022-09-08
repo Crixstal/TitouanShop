@@ -6,11 +6,12 @@ using UnityEngine;
 namespace Com.IsartDigital.TitouanShop.TitouanShop {
     public class SpecialCustomer : MonoBehaviour
     {
-        [SerializeField] private List<Sprite> customerSpriteList = new List<Sprite>();
+        [SerializeField] private GameManager gm;
+        [SerializeField] private List<Sprite> specialCustSpriteList = new List<Sprite>();
         
-        [HideInInspector] public GameObject requestedObject;
-        [HideInInspector] public Color color = Color.white;
-        
+        public GameObject requestedObject;
+        public Color color = Color.white;
+
         private void Start()
         {
             Rect rect = GetComponent<RectTransform>().rect;
@@ -18,10 +19,30 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
             gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
 
-            GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
-
-            requestedObject = GameManager.allObjectAvailable[Random.Range(0, GameManager.allObjectAvailable.Count)];
-            color = GameManager.allColorAvailable[Random.Range(0, GameManager.allColorAvailable.Count)];
+            if (gm.newColorDone)
+            {        
+                GetComponent<Image>().sprite = specialCustSpriteList[gm.indexspecialCustomer];
+                requestedObject = GameManager.allObjectAvailable[0];
+                color = GameManager.allColorAvailable[1];
+            }
+            else if (gm.newObjectDone)
+            {        
+                GetComponent<Image>().sprite = specialCustSpriteList[gm.indexspecialCustomer];
+                requestedObject = GameManager.allObjectAvailable[1];
+                color = GameManager.allColorAvailable[0];
+            }            
+            else if (gm.crazyObjDone)
+            {    
+                GetComponent<Image>().sprite = specialCustSpriteList[gm.indexspecialCustomer];
+                requestedObject = GameManager.allObjectAvailable[gm.indexCrazyObject];
+                color = GameManager.allColorAvailable[0];
+            }
+            else
+            {
+                GetComponent<Image>().sprite = specialCustSpriteList[gm.indexspecialCustomer];
+                requestedObject = GameManager.allObjectAvailable[0];
+                color = GameManager.allColorAvailable[0];
+            }
         }
     }
 }
