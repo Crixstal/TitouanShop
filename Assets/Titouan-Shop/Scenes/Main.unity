@@ -1010,12 +1010,20 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0.30438018, g: 1, b: 0, a: 1}
   allSprite:
-  - {fileID: 21300000, guid: 28ef2dce83eec914796ab813ecec1993, type: 3}
-  tutoColor: 0
-  tutoObject: 0
-  endgame: 0
-  randomTimer: 0
-  indexCrazyObject: 0
+  - {fileID: 21300000, guid: b3d6706629b22b8428443f13a9c8261e, type: 3}
+  - {fileID: 21300000, guid: 0dffb7b3c8f48d84a894fbe8d6ac1205, type: 3}
+  - {fileID: 21300000, guid: 91f2aee721a7c5240862ecaf389c8159, type: 3}
+  - {fileID: 21300000, guid: a0b585e3bfae04d4291bdfef42f4d84c, type: 3}
+  - {fileID: 21300000, guid: cbfe79dd79975b24db7a7899f15bfdc0, type: 3}
+  - {fileID: 21300000, guid: a64e83b2909825f4b942e12811af5aac, type: 3}
+  - {fileID: 21300000, guid: 8fb6f7123a8f1e8489766ebe98dfbec2, type: 3}
+  - {fileID: 21300000, guid: e28aa9425c95f064aa6e657011b61d8d, type: 3}
+  - {fileID: 21300000, guid: ba20545dbe4b4c94d932a82dcec77db1, type: 3}
+  tutoColor: 1
+  tutoObject: 3
+  endgame: 10
+  randomTimer: 5
+  indexCrazyObject: 5
   crazyObjDone: 0
 --- !u!1 &1839283006
 GameObject:

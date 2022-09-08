@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-namespace Com.IsartDigital.TitouanShop
-{
-    public class Customer : MonoBehaviour
+namespace Com.IsartDigital.TitouanShop.TitouanShop {
+    public class SpecialCustomer : MonoBehaviour
     {
         [SerializeField] private List<Sprite> customerSpriteList = new List<Sprite>();
         
