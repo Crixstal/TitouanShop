@@ -8,6 +8,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
     {
         [SerializeField] private GameManager gm;
         [SerializeField] private GameObject customer;
+        [SerializeField] private GameObject specialCustomer;
         [SerializeField] private float spawnTimer = 0f;
         
         private Transform spawnRight;
@@ -32,6 +33,8 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
         private void Update()
         {
+            CheckPhase();
+            
             foreach (var spawner in spawnList)
             {
                 if (spawner.childCount == 0)
@@ -52,15 +55,34 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             Instantiate(customer, spawner);
             ++customerCounter;
         }
-        
-        private void Tuto()
+
+        private void CheckPhase()
         {
-            // right - left / banane
-            // middle / banane / color
-            // full / banane / all colors
-            // middle / new obj
-            // full
-            // nawak
+            if (customerCounter == gm.tutoColor)
+            {
+                foreach (var spawner in spawnList)
+                    spawner.gameObject.SetActive(false);
+                
+                Instantiate(specialCustomer, spawnStory);
+            }
+            
+            else if (customerCounter == gm.tutoObject)
+            {
+                foreach (var spawner in spawnList)
+                    spawner.gameObject.SetActive(false);
+            }
+            
+            else if (gm.crazyObjDone)
+            {
+                foreach (var spawner in spawnList)
+                    spawner.gameObject.SetActive(false);
+            }
+            
+            else if (customerCounter >= gm.endgame)
+            {
+                foreach (var spawner in spawnList)
+                    spawner.gameObject.SetActive(false);
+            }
         }
     }
 }

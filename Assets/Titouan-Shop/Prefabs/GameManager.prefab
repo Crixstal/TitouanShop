@@ -44,7 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39179e34e6e44c498d8fbd8c4e50b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  counter: {fileID: 0}
   allColor:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0.30438018, g: 1, b: 0, a: 1}
+  allObject:
+  - {fileID: 2972008190022723753, guid: a6a5599babd427f4498f9e000714900d, type: 3}
+  - {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
+  - {fileID: 2972008190022723753, guid: 66ce4355fcfc96144ae8749ae02ff3e1, type: 3}
+  - {fileID: 2972008190022723753, guid: fd29117d30746e643abc82963e3feb05, type: 3}
+  - {fileID: 2972008190022723753, guid: 7e0c8690451a3cf47b584cf3706db425, type: 3}
+  - {fileID: 2972008190022723753, guid: f490bb7d0cd58a04099913b7bd1132b1, type: 3}
+  - {fileID: 2972008190022723753, guid: 66c839039fb2e7a4e9476989c9695b0e, type: 3}
+  - {fileID: 2972008190022723753, guid: aa35bea3b1b45cf4ab58985cc267b6ba, type: 3}
+  - {fileID: 2972008190022723753, guid: 8d5ab7cab9c71124b94b6bbbd8f5b2e4, type: 3}
+  - {fileID: 2972008190022723753, guid: e7e14ca922d5eb344867d0c30a28006c, type: 3}
+  tutoColor: 0
+  tutoObject: 0
+  endgame: 0
+  randomTimer: 0
+  indexCrazyObject: 0
+  crazyObjDone: 0

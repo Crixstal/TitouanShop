@@ -9,24 +9,24 @@ namespace Com.IsartDigital.TitouanShop
     {
         [SerializeField] private SpawnerCharacter counter;
         
-        [SerializeField] public List<Color> allColor = new List<Color>();
+        [SerializeField] private List<Color> allColor = new List<Color>();
         public static List<Color> allColorAvailable = new List<Color>();
         
-        [SerializeField] public List<Sprite> allSprite = new List<Sprite>();
-        public static List<Sprite> allSpriteAvailable = new List<Sprite>();
+        [SerializeField] private List<GameObject> allObject = new List<GameObject>();
+        public static List<GameObject> allObjectAvailable = new List<GameObject>();
 
         [SerializeField] public int tutoColor, tutoObject, endgame;
         [SerializeField] private int randomTimer;
         [SerializeField] private int indexCrazyObject;
 
         private int indexColor = 0;
-        private int indexSprite = 0;
+        private int indexObject = 0;
         [HideInInspector] public bool crazyObjDone = false;
         
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
-            allSpriteAvailable.Add(allSprite[indexSprite]);
+            allObjectAvailable.Add(allObject[indexObject]);
         }
 
         private void Update()
@@ -40,7 +40,7 @@ namespace Com.IsartDigital.TitouanShop
             else if (counter.customerCounter > tutoObject && crazyObjDone == false) // random
                 StartCoroutine(WaitCoroutine());
                 
-            else if (indexSprite == indexCrazyObject) // introduce crazy object    
+            else if (indexObject == indexCrazyObject) // introduce crazy object    
             {
                 NewObject();
                 crazyObjDone = true;
@@ -50,7 +50,7 @@ namespace Com.IsartDigital.TitouanShop
                 StartCoroutine(WaitCoroutine());
                 
             else if (counter.customerCounter >= endgame) // end game
-                allSpriteAvailable.Add(allSprite[++indexSprite]);
+                allObjectAvailable.Add(allObject[++indexObject]);
         }
         
         IEnumerator WaitCoroutine()
@@ -66,7 +66,7 @@ namespace Com.IsartDigital.TitouanShop
         
         private void NewObject()
         {
-            allSpriteAvailable.Add(allSprite[++indexSprite]);
+            allObjectAvailable.Add(allObject[++indexObject]);
         }
         
         private void RandomAdd()
@@ -87,7 +87,7 @@ namespace Com.IsartDigital.TitouanShop
                     allColorAvailable.Add(allColor[++indexColor]);
                     break;
                 case 1:
-                    allSpriteAvailable.Add(allSprite[++indexSprite]);
+                    allObjectAvailable.Add(allObject[++indexObject]);
                     break;
                 default:
                     break;
