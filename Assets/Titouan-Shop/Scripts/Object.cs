@@ -21,6 +21,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         private bool exitCustomerCollider = true;
 
         private const string TAG_CHARACTER = "Character";
+        private const string TAG_SPECIAL_CHARACTER = "SpecialCharacter";
 
         private void Awake()
         {
@@ -69,7 +70,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf(" ")) && colorToCheck.Equals(actualColor))
                 {
-                    Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -77,7 +78,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name.Substring(0, gameObject.name.IndexOf("(")) && colorToCheck.Equals(actualColor))
                 {
-                    Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -85,7 +86,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
             {
                 if (gameObjectToCheck != null && gameObjectToCheck.name == gameObject.name && colorToCheck.Equals(actualColor))
                 {
-                    Debug.Log("Same Object");
+                    customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>().ResetTimer(customerToCheck.transform.parent.gameObject);
                     Destroy(customerToCheck);
                 }
             }
@@ -108,12 +109,8 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
                 {
                     index++;
 
-                    Debug.Log(index);
-
                     if (index >= allColorAvailable.Count)
-                    {
                         index = 0;
-                    }
 
                     gameObject.GetComponent<Image>().color = allColorAvailable[index];
                 }
@@ -122,15 +119,20 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            Debug.Log("1 " + collision.gameObject.transform.parent.name);
-
             if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
             {
                 customerToCheck = collision.gameObject;
                 gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
                 colorToCheck = collision.GetComponent<Customer>().color;
                 exitCustomerCollider = false;
-                Debug.Log( " 2 " +customerToCheck.transform.parent.name);
+            }
+            
+            if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER && exitCustomerCollider)
+            {
+                customerToCheck = collision.gameObject;
+                gameObjectToCheck = collision.GetComponent<SpecialCustomer>().requestedObject;
+                colorToCheck = collision.GetComponent<SpecialCustomer>().color;
+                exitCustomerCollider = false;
             }
         }
 
@@ -138,7 +140,13 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop
         {
             if (collision.gameObject.tag == TAG_CHARACTER)
             {
-                Debug.Log("ExitColision " + collision.gameObject.transform.parent.name);
+                gameObjectToCheck = null;
+                colorToCheck = default;
+                exitCustomerCollider = true;
+            }
+            
+            if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER)
+            {
                 gameObjectToCheck = null;
                 colorToCheck = default;
                 exitCustomerCollider = true;

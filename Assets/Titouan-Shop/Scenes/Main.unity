@@ -1009,22 +1009,26 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0.30438018, g: 1, b: 0, a: 1}
-  allSprite:
-  - {fileID: 21300000, guid: b3d6706629b22b8428443f13a9c8261e, type: 3}
-  - {fileID: 21300000, guid: 0dffb7b3c8f48d84a894fbe8d6ac1205, type: 3}
-  - {fileID: 21300000, guid: 91f2aee721a7c5240862ecaf389c8159, type: 3}
-  - {fileID: 21300000, guid: a0b585e3bfae04d4291bdfef42f4d84c, type: 3}
-  - {fileID: 21300000, guid: cbfe79dd79975b24db7a7899f15bfdc0, type: 3}
-  - {fileID: 21300000, guid: a64e83b2909825f4b942e12811af5aac, type: 3}
-  - {fileID: 21300000, guid: 8fb6f7123a8f1e8489766ebe98dfbec2, type: 3}
-  - {fileID: 21300000, guid: e28aa9425c95f064aa6e657011b61d8d, type: 3}
-  - {fileID: 21300000, guid: ba20545dbe4b4c94d932a82dcec77db1, type: 3}
-  tutoColor: 1
+  - {r: 0, g: 0, b: 1, a: 1}
+  allObject:
+  - {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
+  - {fileID: 2972008190022723753, guid: a6a5599babd427f4498f9e000714900d, type: 3}
+  - {fileID: 2972008190022723753, guid: 66ce4355fcfc96144ae8749ae02ff3e1, type: 3}
+  - {fileID: 2972008190022723753, guid: fd29117d30746e643abc82963e3feb05, type: 3}
+  - {fileID: 2972008190022723753, guid: 7e0c8690451a3cf47b584cf3706db425, type: 3}
+  - {fileID: 2972008190022723753, guid: f490bb7d0cd58a04099913b7bd1132b1, type: 3}
+  - {fileID: 2972008190022723753, guid: 66c839039fb2e7a4e9476989c9695b0e, type: 3}
+  - {fileID: 2972008190022723753, guid: aa35bea3b1b45cf4ab58985cc267b6ba, type: 3}
+  - {fileID: 2972008190022723753, guid: 8d5ab7cab9c71124b94b6bbbd8f5b2e4, type: 3}
+  - {fileID: 2972008190022723753, guid: e7e14ca922d5eb344867d0c30a28006c, type: 3}
+  tutoColor: 2
   tutoObject: 3
-  endgame: 10
   randomTimer: 5
-  indexCrazyObject: 5
+  indexCrazyObject: 6
+  newColorDone: 0
+  newObjectDone: 0
   crazyObjDone: 0
+  indexspecialCustomer: 0
 --- !u!1 &1839283006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 1721332948}
   customer: {fileID: 9216369569556825967, guid: 8d2850bedb327d64f9e43797dc4a5e84, type: 3}
-  spawnTimer: 1
+  specialCustomer: {fileID: 9216369569556825967, guid: 5f4b4d2bb58f1664b971ee8800a26547, type: 3}
+  spawnTimer: 5
   customerCounter: 0
 --- !u!222 &2048283581
 CanvasRenderer:
