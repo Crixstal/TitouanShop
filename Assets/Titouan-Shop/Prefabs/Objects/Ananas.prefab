@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1474117420}
   - component: {fileID: 1474117419}
   m_Layer: 5
-  m_Name: Banane
+  m_Name: Ananas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cbfe79dd79975b24db7a7899f15bfdc0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0b585e3bfae04d4291bdfef42f4d84c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1284327019675372842}
   - component: {fileID: 3825651089009506308}
   m_Layer: 5
-  m_Name: Banane
+  m_Name: Ananas
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 04feb8bf921a86f4a9e5d20ba865a778, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b7e0613e3ce72a4e9c8f9aea71e411d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
