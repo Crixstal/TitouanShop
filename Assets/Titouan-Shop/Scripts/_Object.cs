@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Com.IsartDigital.TitouanShop.TitouanShop {
+namespace Com.IsartDigital.TitouanShop
+{
     public class _Object : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler, IPointerDownHandler
     {
         private Canvas canvas;
@@ -73,7 +74,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
                 {
                     numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
                     {
                         SpawnerCharacter.storyDone = true;
                         GameManager.addItem = true;
@@ -93,7 +94,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
                     numberOfObjectAccepted++;
 
-                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
+                    if (customerToCheck.tag == TAG_SPECIAL_CHARACTER && (numberOfObjectAccepted == 5 || numberOfObjectAccepted == 19))
                     {
                         SpawnerCharacter.storyDone = true;
                         GameManager.addItem = true;

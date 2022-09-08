@@ -42,14 +42,14 @@ namespace Com.IsartDigital.TitouanShop
 
         private void Update()
         {
-            if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoColor && !newColorDone) // tuto new color
+            if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted == tutoColor && !newColorDone) // tuto new color
             {
                 NewColor();
                 newColorDone = true;
                 addItem = false;
             }
                 
-            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
+            else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
             {
                 Debug.Log("NewObjectInGameManager");
                 NewObject();
@@ -57,7 +57,7 @@ namespace Com.IsartDigital.TitouanShop
                 addItem = false;
             }
                 
-            else if (Com.IsartDigital.TitouanShop.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
+            else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
             {
                 timer += Time.deltaTime;
                 if (timer >= randomTimer)

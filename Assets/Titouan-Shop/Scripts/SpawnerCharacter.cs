@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Com.IsartDigital.TitouanShop.TitouanShop {
+namespace Com.IsartDigital.TitouanShop
+{
     public class SpawnerCharacter : MonoBehaviour
     {
         [SerializeField] private GameManager gm;
         [SerializeField] private GameObject customer;
         [SerializeField] private GameObject specialCustomer;
+        [SerializeField] private GameObject bubble;
         [SerializeField] private float spawnTimer = 0f;
         
         private Transform spawnRight;
         private Transform spawnLeft;
         private Transform spawnMiddle;
         private Transform spawnStory;
+        
+        private Transform bubbleRight;
+        private Transform bubbleMiddle;
+        private Transform bubbleLeft;
         
         private List<Transform> spawnList = new List<Transform>();
         [HideInInspector] public int customerCounter = 0;
@@ -41,6 +47,10 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
             spawnList.Add(spawnLeft);
             spawnList.Add(spawnMiddle);
 
+            bubbleRight = transform.GetChild(2).transform.Find("RightBubble");
+            bubbleLeft = transform.GetChild(2).transform.Find("LeftBubble");
+            bubbleMiddle = transform.GetChild(2).transform.Find("MiddleBubble");
+            
             CheckPhase();
         }
 
@@ -102,7 +112,23 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
         private void AddCharacter(Transform spawner, GameObject customer)
         {
-            Instantiate(customer, spawner);
+            Bubble myBubble = null;
+
+            if (spawner.name == "LeftSpawn")
+                myBubble = Instantiate(bubble, bubbleLeft).GetComponent<Bubble>();
+            
+            else if (spawner.name == "MiddleSpawn" || spawner.name == "StorySpawn")
+                myBubble = Instantiate(bubble, bubbleMiddle).GetComponent<Bubble>();
+            
+            else if (spawner.name == "RightSpawn")
+                myBubble = Instantiate(bubble, bubbleRight).GetComponent<Bubble>();
+            
+            if (customer.name == "Customer")
+                Instantiate(customer, spawner).GetComponent<Customer>().bubble = myBubble;
+            
+            if (customer.name == "SpecialCustomer")
+                Instantiate(customer, spawner).GetComponent<SpecialCustomer>().bubble = myBubble;
+                
             ++customerCounter;
         }
 

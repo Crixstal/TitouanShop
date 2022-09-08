@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Com.IsartDigital.TitouanShop.TitouanShop {
+namespace Com.IsartDigital.TitouanShop
+{
     public class TitleCard : MonoBehaviour
     {
         [SerializeField] private Button btnPlay;
