@@ -19,38 +19,88 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         private List<Transform> spawnList = new List<Transform>();
         [HideInInspector] public int customerCounter = 0;
 
+        private float counter;
+        private float counter1;
+        private float counter2;
+
+        private bool spawnCustomer = true;
+        private bool spawnCustomer1 = true;
+        private bool spawnCustomer2 = true;
+        
+        static public bool storyDone = false;
+        public static bool spawn3Customer = false;
+        
         private void Start()
         {
             spawnRight = transform.GetChild(0).transform.Find("RightSpawn");
             spawnLeft = transform.GetChild(0).transform.Find("LeftSpawn");
             spawnMiddle = transform.GetChild(0).transform.Find("MiddleSpawn");
-            spawnStory = transform.Find("StorySpawn");
+            spawnStory = transform.GetChild(1).transform.Find("StorySpawn");
             
             spawnList.Add(spawnRight);
             spawnList.Add(spawnLeft);
             spawnList.Add(spawnMiddle);
+
+            CheckPhase();
         }
 
         private void Update()
         {
-            CheckPhase();
+            //le repasser a false quand on a atteint le nombre de customer pour faire spawn un character special (d'abord attendre la validation des trois puis faire spawn le special )
+            //if (!storyDone)
+            //    CheckPhase();
             
-            foreach (var spawner in spawnList)
+            counter += Time.deltaTime;
+            counter1 += Time.deltaTime;
+            counter2 += Time.deltaTime;
+
+            if (storyDone )
             {
-                if (spawner.childCount == 0)
-                    StartCoroutine(WaitCoroutine(spawner));
+                //foreach (var spawner in spawnList)
+                //    spawner.gameObject.SetActive(true);
+                
+                if (counter >= spawnTimer && spawnCustomer)
+                {
+                    AddCharacter(spawnLeft,customer);
+                    spawnCustomer = false;
+                }
+
+                if (counter1 >= spawnTimer && spawnCustomer1)
+                {
+                    AddCharacter(spawnMiddle,customer);
+                    spawnCustomer1 = false;
+                }
+
+                if (counter2 >= spawnTimer && spawnCustomer2)
+                {
+                    AddCharacter(spawnRight,customer);
+                    spawnCustomer2 = false;
+                }
             }
         }
-        
-        IEnumerator WaitCoroutine(Transform spawner)
-        {
-            yield return new WaitForSeconds(spawnTimer);
 
-            if (spawner.childCount == 0)
-                AddCharacter(spawner);
+        public void ResetTimer(GameObject spawner)
+        {
+            if (spawner.name == spawnLeft.name)
+            {
+                counter = 0f;
+                spawnCustomer = true;
+            }
+            else if (spawner.name == spawnMiddle.name)
+            {
+                counter1 = 0f;
+                spawnCustomer1 = true;
+            }
+            else if (spawner.name == spawnRight.name)
+            {
+                counter2 = 0f;
+                spawnCustomer2 = true;
+            }
+
+            CheckPhase();
         }
 
-        private void AddCharacter(Transform spawner)
+        private void AddCharacter(Transform spawner, GameObject customer)
         {
             Instantiate(customer, spawner);
             ++customerCounter;
@@ -58,31 +108,60 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
 
         private void CheckPhase()
         {
-            if (customerCounter == gm.tutoColor)
+            if (_Object.numberOfObjectAccepted == 0)
             {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
+                AddCharacter(spawnStory,specialCustomer);
+
+            }
+            else if (_Object.numberOfObjectAccepted == 1)
+            {
+                AddCharacter(spawnLeft,specialCustomer);
+                AddCharacter(spawnRight, specialCustomer);
+
+            }else if (_Object.numberOfObjectAccepted == 3)
+            {
+                AddCharacter(spawnLeft, specialCustomer);
+                AddCharacter(spawnRight, specialCustomer);
+                AddCharacter(spawnMiddle, specialCustomer);
+            }
+
+            //if (Object.numberOfObjectAccepted == gm.tutoColor )
+            //{
+            //    Debug.Log("TutoCOuleur");
+
+            //    foreach (var spawner in spawnList)
+            //        spawner.gameObject.SetActive(false);
                 
-                Instantiate(specialCustomer, spawnStory);
-            }
+            //    if (spawnStory.childCount == 0)
+            //        Instantiate(specialCustomer, spawnStory);
+            //}
             
-            else if (customerCounter == gm.tutoObject)
-            {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
-            }
+            //else if (Object.numberOfObjectAccepted == gm.tutoObject)
+            //{
+            //    foreach (var spawner in spawnList)
+            //        spawner.gameObject.SetActive(false);
+                
+            //    if (spawnStory.childCount == 0)
+            //        Instantiate(specialCustomer, spawnStory);
+            //}
             
-            else if (gm.crazyObjDone)
-            {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
-            }
-            
-            else if (customerCounter >= gm.endgame)
-            {
-                foreach (var spawner in spawnList)
-                    spawner.gameObject.SetActive(false);
-            }
+            //else if (gm.crazyObjDone)
+            //{
+            //    foreach (var spawner in spawnList)
+            //        spawner.gameObject.SetActive(false);
+    
+            //    if (spawnStory.childCount == 0)
+            //        Instantiate(specialCustomer, spawnStory);
+            //}
+
+            //else
+            //{
+            //    foreach (var spawner in spawnList)
+            //        spawner.gameObject.SetActive(false);
+
+            //    if (spawnStory.childCount == 0)
+            //        Instantiate(specialCustomer, spawnStory);
+            //}
         }
     }
 }
