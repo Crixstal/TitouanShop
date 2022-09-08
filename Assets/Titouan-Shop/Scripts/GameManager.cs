@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Com.IsartDigital.TitouanShop.TitouanShop;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 namespace Com.IsartDigital.TitouanShop
@@ -16,28 +18,30 @@ namespace Com.IsartDigital.TitouanShop
         public static List<Color> allColorAvailable = new List<Color>();
         public static List<GameObject> allObjectAvailable = new List<GameObject>();
 
-
         [SerializeField] public int tutoColor, tutoObject;
         [SerializeField] private int randomTimer;
         [SerializeField] public int indexCrazyObject;
 
-        private bool endgame = false;
         public int indexColor = 0;
         public int indexObject = 0;
         [HideInInspector] public bool newColorDone = false;
         [HideInInspector] public bool newObjectDone = false;
         [HideInInspector] public bool crazyObjDone = false;
         [HideInInspector] public int indexspecialCustomer = 0;
-        
-
 
         public static bool addItem = false;
+        
+        static public EventInstance music;
 
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
             allObjectAvailable.Add(allObject[indexObject]);
             _counter.AddObject(allObject[indexObject]);
+            
+            music = RuntimeManager.CreateInstance("event:/Music/Music 2");
+            music.start();
+            music.setParameterByName("MusicPhases", 0);        
         }
 
         private void Update()
@@ -51,34 +55,9 @@ namespace Com.IsartDigital.TitouanShop
                 
             else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted == tutoObject && !newObjectDone) // tuto new object    
             {
-                Debug.Log("NewObjectInGameManager");
                 newObjectDone = true;
                 addItem = false;
             }
-            
-            
-
-            else if (Com.IsartDigital.TitouanShop._Object.numberOfObjectAccepted > tutoObject && crazyObjDone == false) // random
-            {
-                //timer += Time.deltaTime;
-                //if (timer >= randomTimer)
-                    //RandomAdd();
-            }
-
-           
-                
-            //else if (indexObject == indexCrazyObject) // introduce crazy object    
-            //{
-            //    NewObject();
-            //    crazyObjDone = true;
-            //}
-            
-            //else if (crazyObjDone && endgame == false) // random
-            //{
-            //    timer += Time.deltaTime;
-            //    if (timer >= randomTimer)
-            //        RandomAdd();            
-            //}
         }
 
         public void AddRaisin()
@@ -98,47 +77,11 @@ namespace Com.IsartDigital.TitouanShop
             //addSur l'etagere
             counter.AddObject(allObject[indexObject]);
 
-            Debug.Log(indexspecialCustomer);
-
             if (indexspecialCustomer == 3)
             {
-                Debug.Log("Lourd");
                 SpawnerCharacter.storyDone = false;
                 SpawnerCharacter.monsieurLicorne = true;
             }
         }
-        
-        //private void RandomAdd()
-        //{
-        //    int randomNb = 0;
-        //    float rand = Random.value;
-            
-        //    if (rand >= 0f && rand < 0.25f)
-        //        randomNb = 0;
-        //    else if (rand >= 0.25f && rand < 0.5f)
-        //        randomNb = 1;
-        //    else if (rand >= 0.5f)
-        //        randomNb = 2;
-            
-        //    switch (randomNb)
-        //    {
-        //        case 0:
-        //            if (indexColor < allColorAvailable.Count - 1)
-        //            {
-        //                allColorAvailable.Add(allColor[++indexColor]);
-        //                timer = 0f;
-        //            }
-        //            break;
-        //        case 1:
-        //            if (indexObject < allObjectAvailable.Count - 1)
-        //            {
-        //                allObjectAvailable.Add(allObject[++indexObject]);
-        //                timer = 0f;
-        //            }
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 }

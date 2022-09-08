@@ -27,7 +27,7 @@ namespace Com.IsartDigital.TitouanShop
         private static SpawnerCharacter spawnerCharacter;
 
         public static int numberOfObjectAccepted = 0;
-
+        
         private void Awake()
         {
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -103,6 +103,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
+                        GameManager.music.setParameterByName("MusicPhases", 1);
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
@@ -110,6 +111,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
+                        GameManager.music.setParameterByName("MusicPhases", 2);
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
@@ -165,6 +167,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
+                        GameManager.music.setParameterByName("MusicPhases", 1);
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
@@ -172,6 +175,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
+                        GameManager.music.setParameterByName("MusicPhases", 2);
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
@@ -227,6 +231,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterRaisin();
+                        GameManager.music.setParameterByName("MusicPhases", 1);
                     }
 
                     if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
@@ -234,6 +239,7 @@ namespace Com.IsartDigital.TitouanShop
                         (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
                     {
                         spawnerCharacter.addCharacterLicorne();
+                        GameManager.music.setParameterByName("MusicPhases", 2);
                     }
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")

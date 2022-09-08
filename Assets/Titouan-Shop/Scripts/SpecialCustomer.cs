@@ -28,17 +28,20 @@ namespace Com.IsartDigital.TitouanShop
                 requestedObject = GameManager.allObjectAvailable[0];
                 color = GameManager.allColorAvailable[0];
 
-            }else if (_Object.numberOfObjectAccepted == 4)
+            }
+            else if (_Object.numberOfObjectAccepted == 4)
             {
                 GetComponent<Image>().sprite = specialCustSpriteList[2];
                 requestedObject = GameManager.allObjectAvailable[0];
                 color = GameManager.allColorAvailable[1];
-            }else if (_Object.numberOfObjectAccepted >= 16 && _Object.numberOfObjectAccepted <= 19)
+            }
+            else if (_Object.numberOfObjectAccepted >= 16 && _Object.numberOfObjectAccepted <= 19)
             {
                 GetComponent<Image>().sprite = specialCustSpriteList[3];
                 requestedObject = GameManager.allObjectAvailable[1];
                 color = GameManager.allColorAvailable[0];
-            }else if (SpawnerCharacter.monsieurLicorne)
+            }
+            else if (SpawnerCharacter.monsieurLicorne)
             {
                 GetComponent<Image>().sprite = specialCustSpriteList[4];
                 requestedObject = GameManager.allObjectAvailable[4];

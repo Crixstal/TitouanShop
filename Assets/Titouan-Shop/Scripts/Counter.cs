@@ -45,13 +45,10 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
                 counterAddNewRow++;
 
                 if (counterAddNewRow == 1)
-                {
                     AugmentationCounterMedium();
 
-                }else if (counterAddNewRow == 2)
-                {
+                else if (counterAddNewRow == 2)
                     AugmentationCounterBig();
-                }
             }
 
             Instantiate(_object, actualRow.transform);
