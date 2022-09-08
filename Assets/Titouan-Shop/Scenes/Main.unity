@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ca76e6bfdcd1d984c93958983927dd76, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2bfe684c5f493a746983b345db8c4dd6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorMAxMedium: 0.38579
   anchorMAxBig: 0.55329
-  spriteCounterMedium: {fileID: 21300000, guid: 2fb38374c9c91dd4ab69743891f16657, type: 3}
-  spriteCounterBig: {fileID: 21300000, guid: d548bc713d9938b41b1becb6b899a749, type: 3}
+  spriteCounterMedium: {fileID: 21300000, guid: 7f1601197ed04654ca12ab856079bad2, type: 3}
+  spriteCounterBig: {fileID: 21300000, guid: bbe0f91b1a6f2c74ea46f62ba21c9d1b, type: 3}
   gameManager: {fileID: 1721332948}
   row: {fileID: 6009408649322635997, guid: 90a6f62b82c82fd40b3ebac46e987f79, type: 3}
 --- !u!1 &519145671

@@ -69,14 +69,6 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
                 spawnCustomer2 = false;
             }
         }
-        
-        //IEnumerator WaitCoroutine(Transform spawner)
-        //{
-        //    yield return new WaitForSeconds(spawnTimer);
-
-        //    if (spawner.childCount == 0)
-        //        AddCharacter(spawner);
-        //}
 
         public void ResetTimer(GameObject spawner)
         {
