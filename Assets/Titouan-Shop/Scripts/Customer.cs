@@ -27,13 +27,48 @@ namespace Com.IsartDigital.TitouanShop
             animator = GetComponent<Animator>();
 
             if (SpawnerCharacter.doPhase3)
-                GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 8)];
+            {
+
+                float random = Random.value;
+
+                if (random >= 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 4)];
+                }
+                else if (random < 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(4, 8)];
+                }
+            }
             else if (!SpawnerCharacter.doPhase3 && !SpecialCustomer.afterLicorne)
-                GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 9)];
+            {
+                float random = Random.value;
+
+                if (random >= 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, 4)];
+                }
+                else if (random < 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(4, 9)];
+                }
+            }
             else if (SpecialCustomer.afterLicorne)
             {
                 GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count)];
+                float random = Random.value;
+
+                if (random >= 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(0, customerSpriteList.Count / 2)];
+                }
+                else if (random < 0.5f)
+                {
+                    GetComponent<Image>().sprite = customerSpriteList[Random.Range(customerSpriteList.Count / 2, customerSpriteList.Count)];
+                }
+
             }
+        
 
             if (!SpawnerCharacter.ajoutObject && !SpawnerCharacter.ajoutColor)
             {
