@@ -60,8 +60,6 @@ namespace Com.IsartDigital.TitouanShop
                 addItem = false;
             }
 
-            Debug.Log(indexObject);
-
             if (/*_counter.transform.GetChild(0).childCount > 23*/ indexObject > 23) //marche pas parce que ajoute dans d'autre truc horizontal
             {
                 Debug.Log("EndGame");

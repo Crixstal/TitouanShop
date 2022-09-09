@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -27,6 +29,10 @@ namespace Com.IsartDigital.TitouanShop
 
             if (_Object.numberOfObjectAccepted == 0)
             {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/BananaMan/Sad");
+                event_Sound.start();
+                event_Sound.release();
+                
                 GetComponent<Image>().sprite = specialCustSpriteList[0];
                 requestedObject = GameManager.allObjectAvailable[0];
                 color = GameManager.allColorAvailable[0];
@@ -40,28 +46,35 @@ namespace Com.IsartDigital.TitouanShop
             }
             else if (_Object.numberOfObjectAccepted == 4)
             {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/GoldenGirl/Sad");
+                event_Sound.start();
+                event_Sound.release();
+                
                 GetComponent<Image>().sprite = specialCustSpriteList[2];
                 requestedObject = GameManager.allObjectAvailable[0];
                 color = GameManager.allColorAvailable[1];
             }
             else if (_Object.numberOfObjectAccepted >= 16 && _Object.numberOfObjectAccepted <= 19)
             {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/OldMan/Sad");
+                event_Sound.start();
+                event_Sound.release();
+                
                 GetComponent<Image>().sprite = specialCustSpriteList[3];
                 requestedObject = GameManager.allObjectAvailable[1];
                 color = GameManager.allColorAvailable[0];
             }
             else if (SpawnerCharacter.monsieurLicorne)
             {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/UnicornMan/Angry");
+                event_Sound.start();
+                event_Sound.release();
+                
                 GetComponent<Image>().sprite = specialCustSpriteList[4];
                 requestedObject = GameManager.allObjectAvailable[4];
                 color = GameManager.allColorAvailable[0];
                 apparitionMonsieurLicorne = true;
             }
-
-            //Rect rect = GetComponent<RectTransform>().rect;
-
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
-            //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
 
             bubble.requestedObject = requestedObject;
             bubble.color = color;
@@ -75,6 +88,31 @@ namespace Com.IsartDigital.TitouanShop
             SpawnerCharacter.counter2 = 0f;
 
             animator.SetBool("happy", true);
+            
+            if (counterDestroy == 0)
+            {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/BananaMan/Happy");
+                event_Sound.start();
+                event_Sound.release();
+            }
+            else if (counterDestroy == 4)
+            {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/GoldenGirl/Happy");
+                event_Sound.start();
+                event_Sound.release();
+            }
+            else if (counterDestroy == 5)
+            {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/OldMan/Happy");
+                event_Sound.start();
+                event_Sound.release();
+            }
+            else if (counterDestroy == 6)
+            {
+                EventInstance event_Sound = RuntimeManager.CreateInstance("event:/Level/Characters/Specials/UnicornMan/Happy");
+                event_Sound.start();
+                event_Sound.release();
+            }
         }
 
         public void StartAnimDespawn()
@@ -96,11 +134,8 @@ namespace Com.IsartDigital.TitouanShop
             }
 
             if (_Object.numberOfObjectAccepted == 4 && counterDestroy == 4f)
-            {
                 spwanerCharacter.AddCharacter(SpawnerCharacter.spawnStory, spwanerCharacter.specialCustomer);
-            }
-
-
+            
             Destroy(gameObject);
         }
 
@@ -112,10 +147,7 @@ namespace Com.IsartDigital.TitouanShop
                 SpawnerCharacter.monsieurLicorne = false;
                 afterLicorne = true;
                 apparitionMonsieurLicorne = false;
- 
             }
-
-       
         }
     }
 }

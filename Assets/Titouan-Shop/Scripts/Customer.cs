@@ -56,11 +56,6 @@ namespace Com.IsartDigital.TitouanShop
                 SpawnerCharacter.ajoutObject = false;
             }
 
-            //Rect rect = GetComponent<RectTransform>().rect;
-
-            //GetComponent<BoxCollider2D>().offset = new Vector2(0, rect.height / 3);
-            //gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width - 100f, rect.height / 2);
-
             bubble.requestedObject = requestedObject;
             bubble.color = color;
             bubble.CreateBubble();
