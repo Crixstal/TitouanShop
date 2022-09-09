@@ -348,10 +348,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: FMOD_TitouanShop/FMOD_TitouanShop.fspro
-  sourceBankPath: FMOD_TitouanShop/Build
+  sourceBankPath: FMOD_TitouanShop/Build/Mobile
   SourceBankPathUnformatted: 
   BankRefreshCooldown: -1
   ShowBankRefreshWindow: 1

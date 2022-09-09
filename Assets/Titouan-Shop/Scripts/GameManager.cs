@@ -32,7 +32,8 @@ namespace Com.IsartDigital.TitouanShop
         static public EventInstance music;
         [SerializeField] private GameObject canvas;
         private float timer = 0f;
-        
+        [SerializeField] private static string nameMenuScene = "Main_Title";
+
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
@@ -108,6 +109,9 @@ namespace Com.IsartDigital.TitouanShop
             }
             if (timer >= 4f)
                 canvas.transform.GetChild(7).gameObject.SetActive(true);
+            if (timer >= 6f)
+                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nameMenuScene);
+
         }
     }
 }
