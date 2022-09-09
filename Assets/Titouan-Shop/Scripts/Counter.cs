@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Com.IsartDigital.TitouanShop.TitouanShop {
+namespace Com.IsartDigital.TitouanShop.TitouanShop
+{
     public class Counter : MonoBehaviour
     {
         [SerializeField] private float anchorMAxMedium = 0.55329f;
@@ -39,7 +40,7 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
         {
             if (transform.GetChild(index).childCount == 4)
             {
-                actualRow = Instantiate(row,transform);
+                actualRow = Instantiate(row, transform);
 
                 index++;
                 counterAddNewRow++;
@@ -51,7 +52,29 @@ namespace Com.IsartDigital.TitouanShop.TitouanShop {
                     AugmentationCounterBig();
             }
 
+            if (GameManager.indexObject == 12)
+            {
+                ResizeObject(new Vector2(160f, 220f));
+            }
+            else if (GameManager.indexObject == 16)
+            {
+                ResizeObject(new Vector2(120f, 220f));
+            }
+
+
             Instantiate(_object, actualRow.transform);
+        }
+
+        private void ResizeObject(Vector2 taille)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                for (int j = 0; j < transform.GetChild(i).childCount; j++)
+                {
+                    transform.GetChild(i).GetChild(j).GetComponent<RectTransform>().sizeDelta = taille;
+                }
+            }
+
         }
     }
 }

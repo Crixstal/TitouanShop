@@ -4,6 +4,7 @@ using Com.IsartDigital.TitouanShop.TitouanShop;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Com.IsartDigital.TitouanShop
 {
@@ -21,7 +22,7 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] public int tutoColor, tutoObject;
 
         public int indexColor = 0;
-        public int indexObject = 0;
+        public static int indexObject = 0;
         [HideInInspector] public bool newColorDone = false;
         [HideInInspector] public bool newObjectDone = false;
         [HideInInspector] public int indexspecialCustomer = 0;
@@ -58,8 +59,11 @@ namespace Com.IsartDigital.TitouanShop
                 addItem = false;
             }
 
-            if (_counter.transform.GetChild(0).childCount > 23)
+            Debug.Log(indexObject);
+
+            if (/*_counter.transform.GetChild(0).childCount > 23*/ indexObject > 23) //marche pas parce que ajoute dans d'autre truc horizontal
             {
+                Debug.Log("EndGame");
                 timer += Time.deltaTime;
                 music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 EndGame();
@@ -76,6 +80,7 @@ namespace Com.IsartDigital.TitouanShop
             allColorAvailable.Add(allColor[++indexColor]);
         }
         
+        [ContextMenu("NewObject")]
         public void NewObject()
         {
             allObjectAvailable.Add(allObject[++indexObject]);

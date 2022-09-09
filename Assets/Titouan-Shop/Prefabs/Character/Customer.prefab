@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9216369569556825960}
   - component: {fileID: 9216369569556825961}
   - component: {fileID: 5816569176053661096}
+  - component: {fileID: 3194796589640622982}
   m_Layer: 5
   m_Name: Customer
   m_TagString: Character
@@ -118,5 +119,26 @@ MonoBehaviour:
       Data4: -1579410170
     Path: event:/Level/Characters/AngryRandomChara
   angryTimer: 5
+  animator: {fileID: 9100000, guid: aba0be52b156f2343a0c761b42673503, type: 2}
   requestedObject: {fileID: 2972008190022723753, guid: 82910dbb4c110c8438f7f91dd5014862, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!95 &3194796589640622982
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216369569556825967}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aba0be52b156f2343a0c761b42673503, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

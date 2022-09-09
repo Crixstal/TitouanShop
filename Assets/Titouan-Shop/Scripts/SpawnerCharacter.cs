@@ -9,7 +9,7 @@ namespace Com.IsartDigital.TitouanShop
     {
         [SerializeField] private GameManager gm;
         [SerializeField] private GameObject customer;
-        [SerializeField] private GameObject specialCustomer;
+        [SerializeField] public GameObject specialCustomer;
         [SerializeField] private GameObject bubble;
         [SerializeField] private float spawnTimer = 0f;
         [SerializeField] public Transform pourMonsieurLicorne;
@@ -27,9 +27,9 @@ namespace Com.IsartDigital.TitouanShop
         
         private List<Transform> spawnList = new List<Transform>();
 
-        private float counter;
-        private float counter1;
-        private float counter2;
+        public static float counter;
+        public static float counter1;
+        public static float counter2;
 
         private bool spawnCustomer = true;
         private bool spawnCustomer1 = true;
@@ -72,8 +72,20 @@ namespace Com.IsartDigital.TitouanShop
             if (storyDone)
             {
                 float percentage = 0.10f;
-                float randomLimitmin = 6f;
-                float randomLimitmax = 10f;
+
+                float randomLimitmin = 0f;
+                float randomLimitmax = 0f;
+
+                if (SpecialCustomer.afterLicorne)
+                {
+                    randomLimitmin = 2f;
+                    randomLimitmax = 4f;
+                }
+                else
+                {
+                    randomLimitmin = 6f;
+                    randomLimitmax = 10f;
+                }
 
                 if (counter >= spawnTimer && spawnCustomer)
                 {
@@ -225,7 +237,7 @@ namespace Com.IsartDigital.TitouanShop
             CheckPhase();
         }
 
-        private void AddCharacter(Transform spawner, GameObject customer)
+        public void AddCharacter(Transform spawner, GameObject customer)
         {
             Bubble myBubble = null;
 
@@ -249,14 +261,8 @@ namespace Com.IsartDigital.TitouanShop
         {
             if (_Object.numberOfObjectAccepted == 0)
                 AddCharacter(spawnStory,specialCustomer);
-            else if (_Object.numberOfObjectAccepted == 1)
-            {
-                AddCharacter(spawnLeft,specialCustomer);
-                AddCharacter(spawnRight, specialCustomer);
-                AddCharacter(spawnMiddle, specialCustomer);
-            }
-            else if (_Object.numberOfObjectAccepted == 4)
-                AddCharacter(spawnStory, specialCustomer);
+
+          
         }
 
         public void addCharacterRaisin()

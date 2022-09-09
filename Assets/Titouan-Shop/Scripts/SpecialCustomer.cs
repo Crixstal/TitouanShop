@@ -17,8 +17,14 @@ namespace Com.IsartDigital.TitouanShop
         public static bool afterLicorne;
         public static bool apparitionMonsieurLicorne = false;
 
+        private static float counterDestroy = 0f;
+
+        public Animator animator;
+
         private void Start()
         {
+            animator = GetComponent<Animator>();
+
             if (_Object.numberOfObjectAccepted == 0)
             {
                 GetComponent<Image>().sprite = specialCustSpriteList[0];
@@ -62,6 +68,42 @@ namespace Com.IsartDigital.TitouanShop
             bubble.CreateBubble();
         }
 
+        public void DoDestroy()
+        {
+            SpawnerCharacter.counter = 0f;
+            SpawnerCharacter.counter1 = 0f;
+            SpawnerCharacter.counter2 = 0f;
+
+            animator.SetBool("happy", true);
+        }
+
+        public void StartAnimDespawn()
+        {
+            animator.SetBool("despawn", true);
+        }
+
+        public void _Destroy()
+        {
+            counterDestroy++;
+
+            SpawnerCharacter spwanerCharacter = GameObject.Find("Spawner_Character").GetComponent<SpawnerCharacter>();
+
+            if (_Object.numberOfObjectAccepted == 1) // faire en sorte que les deux attendent la fin de l'anim 
+            {
+                spwanerCharacter.AddCharacter(SpawnerCharacter.spawnLeft, spwanerCharacter.specialCustomer);
+                spwanerCharacter.AddCharacter(SpawnerCharacter.spawnRight, spwanerCharacter.specialCustomer);
+                spwanerCharacter.AddCharacter(SpawnerCharacter.spawnMiddle, spwanerCharacter.specialCustomer);
+            }
+
+            if (_Object.numberOfObjectAccepted == 4 && counterDestroy == 4f)
+            {
+                spwanerCharacter.AddCharacter(SpawnerCharacter.spawnStory, spwanerCharacter.specialCustomer);
+            }
+
+
+            Destroy(gameObject);
+        }
+
         private void OnDestroy()
         {
             if (GetComponent<Image>().sprite.name == "Chara_spe_4_v1")
@@ -72,6 +114,8 @@ namespace Com.IsartDigital.TitouanShop
                 apparitionMonsieurLicorne = false;
  
             }
+
+       
         }
     }
 }

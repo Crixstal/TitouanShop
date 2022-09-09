@@ -24,7 +24,7 @@ namespace Com.IsartDigital.TitouanShop
 
         private const string TAG_CHARACTER = "Character";
         private const string TAG_SPECIAL_CHARACTER = "SpecialCharacter";
-        private static SpawnerCharacter spawnerCharacter;
+        public static SpawnerCharacter spawnerCharacter;
 
         public static int numberOfObjectAccepted = 0;
         
@@ -36,7 +36,16 @@ namespace Com.IsartDigital.TitouanShop
 
         private void Start()
         {
-            rectransform.sizeDelta = new Vector2(188f,222f);
+            if (GameManager.indexObject <= 11)
+            {
+                rectransform.sizeDelta = new Vector2(188f, 222f);
+            }if (GameManager.indexObject > 11 && GameManager.indexObject < 16)
+            {
+                rectransform.sizeDelta = new Vector2(160f, 222f);
+            }else if (GameManager.indexObject > 15)
+            {
+                rectransform.sizeDelta = new Vector2(120f, 222f);
+            }
         }
 
         private void Update()
@@ -93,32 +102,36 @@ namespace Com.IsartDigital.TitouanShop
                         }
 
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                        customerToCheck.GetComponent<SpecialCustomer>().DoDestroy();
                     }
                     else
+                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
+                        customerToCheck.GetComponent<Customer>().DoDestroy();
+                    }
 
-                    Destroy(customerToCheck);
+
 
                     if (numberOfObjectAccepted == 16)
                         SpawnerCharacter.storyDone = false;
 
-                    if (numberOfObjectAccepted >= 16 &&
-                        SpawnerCharacter.doPhase3 &&
-                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterRaisin();
-                        GameManager.music.setParameterByName("MusicPhases", 1);
-                    }
+                    //if (numberOfObjectAccepted >= 16 &&
+                    //    SpawnerCharacter.doPhase3 &&
+                    //    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterRaisin();
+                    //    GameManager.music.setParameterByName("MusicPhases", 1);
+                    //}
 
-                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterLicorne();
-                        GameManager.music.setParameterByName("MusicPhases", 2);
-                    }
+                    //if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterLicorne();
+                    //    GameManager.music.setParameterByName("MusicPhases", 2);
+                    //}
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
                         SpawnerCharacter.storyDone = true;
@@ -157,32 +170,37 @@ namespace Com.IsartDigital.TitouanShop
                         }
 
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                        customerToCheck.GetComponent<SpecialCustomer>().DoDestroy();
+
                     }
                     else
+                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
+                        customerToCheck.GetComponent<Customer>().DoDestroy();
+                    }
 
-                    Destroy(customerToCheck);
+                    //Destroy(customerToCheck);
 
                     if (numberOfObjectAccepted == 16)
                         SpawnerCharacter.storyDone = false;
 
-                    if (numberOfObjectAccepted >= 16 &&
-                        SpawnerCharacter.doPhase3 &&
-                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterRaisin();
-                        GameManager.music.setParameterByName("MusicPhases", 1);
-                    }
+                    //if (numberOfObjectAccepted >= 16 &&
+                    //    SpawnerCharacter.doPhase3 &&
+                    //    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterRaisin();
+                    //    GameManager.music.setParameterByName("MusicPhases", 1);
+                    //}
 
-                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterLicorne();
-                        GameManager.music.setParameterByName("MusicPhases", 2);
-                    }
+                    //if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterLicorne();
+                    //    GameManager.music.setParameterByName("MusicPhases", 2);
+                    //}
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
                         SpawnerCharacter.storyDone = true;
@@ -221,32 +239,38 @@ namespace Com.IsartDigital.TitouanShop
                         }
 
                         Destroy(customerToCheck.GetComponent<SpecialCustomer>().bubble.gameObject);
+                        customerToCheck.GetComponent<SpecialCustomer>().DoDestroy();
                     }
                     else
+                    {
                         Destroy(customerToCheck.GetComponent<Customer>().bubble.gameObject);
+                        customerToCheck.GetComponent<Customer>().DoDestroy();
+                    }
 
-                    Destroy(customerToCheck);
+                    //Destroy(customerToCheck);
 
                     if (numberOfObjectAccepted == 16)
                         SpawnerCharacter.storyDone = false;
 
-                    if (numberOfObjectAccepted >= 16 &&
-                        SpawnerCharacter.doPhase3 &&
-                        ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterRaisin();
-                        GameManager.music.setParameterByName("MusicPhases", 1);
-                    }
 
-                    if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
-                        (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
-                    {
-                        spawnerCharacter.addCharacterLicorne();
-                        GameManager.music.setParameterByName("MusicPhases", 2);
-                    }
+                    //if (numberOfObjectAccepted >= 16 &&
+                    //    SpawnerCharacter.doPhase3 &&
+                    //    ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterRaisin();
+                    //    GameManager.music.setParameterByName("MusicPhases", 1);
+                    //}
+
+
+                    //if (SpawnerCharacter.monsieurLicorne && ((SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 1) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 1 && SpawnerCharacter.spawnMiddle.childCount == 0 && SpawnerCharacter.spawnRight.childCount == 0) ||
+                    //    (SpawnerCharacter.spawnLeft.childCount == 0 && SpawnerCharacter.spawnMiddle.childCount == 1 && SpawnerCharacter.spawnRight.childCount == 0)))
+                    //{
+                    //    spawnerCharacter.addCharacterLicorne();
+                    //    GameManager.music.setParameterByName("MusicPhases", 2);
+                    //}
 
                     if (customerToCheck.GetComponent<Image>().sprite.name == "Chara_spe_3_v2")
                         SpawnerCharacter.storyDone = true;
@@ -367,7 +391,6 @@ namespace Com.IsartDigital.TitouanShop
                         gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
                         colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
                         exitCustomerCollider = false;
-                        Debug.Log("CollisionSpecialCustomer");
                     }
                 }
             }
