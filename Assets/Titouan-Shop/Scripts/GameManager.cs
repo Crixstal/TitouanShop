@@ -19,20 +19,19 @@ namespace Com.IsartDigital.TitouanShop
         public static List<GameObject> allObjectAvailable = new List<GameObject>();
 
         [SerializeField] public int tutoColor, tutoObject;
-        [SerializeField] private int randomTimer;
-        [SerializeField] public int indexCrazyObject;
 
         public int indexColor = 0;
         public int indexObject = 0;
         [HideInInspector] public bool newColorDone = false;
         [HideInInspector] public bool newObjectDone = false;
-        [HideInInspector] public bool crazyObjDone = false;
         [HideInInspector] public int indexspecialCustomer = 0;
 
         public static bool addItem = false;
         
         static public EventInstance music;
-
+        [SerializeField] private GameObject canvas;
+        private float timer = 0f;
+        
         private void Start()
         {
             allColorAvailable.Add(allColor[indexColor]);
@@ -58,6 +57,13 @@ namespace Com.IsartDigital.TitouanShop
                 newObjectDone = true;
                 addItem = false;
             }
+
+            if (_counter.transform.GetChild(0).childCount > 23)
+            {
+                timer += Time.deltaTime;
+                music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                EndGame();
+            }
         }
 
         public void AddRaisin()
@@ -82,6 +88,21 @@ namespace Com.IsartDigital.TitouanShop
                 SpawnerCharacter.storyDone = false;
                 SpawnerCharacter.monsieurLicorne = true;
             }
+        }
+
+        private void EndGame()
+        {
+            canvas.transform.GetChild(1).gameObject.SetActive(false);
+            canvas.transform.GetChild(2).gameObject.SetActive(false);
+            canvas.transform.GetChild(3).gameObject.SetActive(false);
+
+            if (timer >= 2f)
+            {
+                canvas.transform.GetChild(6).gameObject.SetActive(true);
+                canvas.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            if (timer >= 4f)
+                canvas.transform.GetChild(7).gameObject.SetActive(true);
         }
     }
 }

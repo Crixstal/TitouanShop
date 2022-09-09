@@ -26,7 +26,6 @@ namespace Com.IsartDigital.TitouanShop
         private Transform bubbleLeft;
         
         private List<Transform> spawnList = new List<Transform>();
-        [HideInInspector] public int customerCounter = 0;
 
         private float counter;
         private float counter1;
@@ -36,10 +35,8 @@ namespace Com.IsartDigital.TitouanShop
         private bool spawnCustomer1 = true;
         private bool spawnCustomer2 = true;
 
-        
         static public bool storyDone = false;
         static public bool monsieurLicorne = false;
-        public static bool spawn3Customer = false;
 
         private float timer = 0f;
         private float limitTimer;
@@ -68,10 +65,6 @@ namespace Com.IsartDigital.TitouanShop
 
         private void Update()
         {
-            //le repasser a false quand on a atteint le nombre de customer pour faire spawn un character special (d'abord attendre la validation des trois puis faire spawn le special )
-            //if (!storyDone)
-            //    CheckPhase();
-            
             counter += Time.deltaTime;
             counter1 += Time.deltaTime;
             counter2 += Time.deltaTime;
@@ -89,9 +82,7 @@ namespace Com.IsartDigital.TitouanShop
                     if (!doPhase3)
                     {
                         if (setLimitTimer)
-                        {
                             limitTimer = Random.Range(randomLimitmin, randomLimitmax);
-                        }
 
                         if (timer >= limitTimer)
                         {
@@ -120,7 +111,6 @@ namespace Com.IsartDigital.TitouanShop
 
                             timer = 0f;
                         }
-
                     }
 
                     AddCharacter(spawnLeft, customer);
@@ -134,9 +124,7 @@ namespace Com.IsartDigital.TitouanShop
                     if (!doPhase3)
                     {
                         if (setLimitTimer)
-                        {
                             limitTimer = Random.Range(randomLimitmin, randomLimitmax);
-                        }
 
                         if (timer >= limitTimer)
                         {
@@ -166,7 +154,6 @@ namespace Com.IsartDigital.TitouanShop
 
                             timer = 0f;
                         }
-
                     }
                     AddCharacter(spawnMiddle, customer);
                     spawnCustomer1 = false;
@@ -179,9 +166,7 @@ namespace Com.IsartDigital.TitouanShop
                     if (!doPhase3)
                     {
                         if (setLimitTimer)
-                        {
                             limitTimer = Random.Range(randomLimitmin, randomLimitmax);
-                        }
 
                         if (timer >= limitTimer)
                         {
@@ -211,15 +196,12 @@ namespace Com.IsartDigital.TitouanShop
 
                             timer = 0f;
                         }
-
                     }
 
                     AddCharacter(spawnRight, customer);
                     spawnCustomer2 = false;
                 }
             }
-
-            
         }
 
         public void ResetTimer(GameObject spawner)
@@ -257,79 +239,24 @@ namespace Com.IsartDigital.TitouanShop
                 myBubble = Instantiate(bubble, bubbleRight).GetComponent<Bubble>();
 
             if (customer.name == "Customer")
-            {
                 Instantiate(customer, spawner).GetComponent<Customer>().bubble = myBubble;
-            }
             
             if (customer.name == "SpecialCustomer")
                 Instantiate(customer, spawner).GetComponent<SpecialCustomer>().bubble = myBubble;
-                
-            ++customerCounter;
         }
 
         private void CheckPhase()
         {
             if (_Object.numberOfObjectAccepted == 0)
-            {
                 AddCharacter(spawnStory,specialCustomer);
-
-            }
             else if (_Object.numberOfObjectAccepted == 1)
             {
-                //spawnLeft.gameObject.SetActive(true);
-                //spawnRight.gameObject.SetActive(true);
-
                 AddCharacter(spawnLeft,specialCustomer);
                 AddCharacter(spawnRight, specialCustomer);
                 AddCharacter(spawnMiddle, specialCustomer);
-            }else if (_Object.numberOfObjectAccepted == 4)
-            {
-                AddCharacter(spawnStory, specialCustomer);
             }
-
-            //Debug.Log(_Object.numberOfObjectAccepted);
-            //Debug.Log(doPhase3);
-            //Debug.Log(spawnLeft.childCount);
-            //Debug.Log(spawnRight.childCount);
-            //Debug.Log(spawnMiddle.childCount);
-
-            //if (Object.numberOfObjectAccepted == gm.tutoColor )
-            //{
-            //    Debug.Log("TutoCOuleur");
-
-            //    foreach (var spawner in spawnList)
-            //        spawner.gameObject.SetActive(false);
-                
-            //    if (spawnStory.childCount == 0)
-            //        Instantiate(specialCustomer, spawnStory);
-            //}
-            
-            //else if (Object.numberOfObjectAccepted == gm.tutoObject)
-            //{
-            //    foreach (var spawner in spawnList)
-            //        spawner.gameObject.SetActive(false);
-                
-            //    if (spawnStory.childCount == 0)
-            //        Instantiate(specialCustomer, spawnStory);
-            //}
-            
-            //else if (gm.crazyObjDone)
-            //{
-            //    foreach (var spawner in spawnList)
-            //        spawner.gameObject.SetActive(false);
-    
-            //    if (spawnStory.childCount == 0)
-            //        Instantiate(specialCustomer, spawnStory);
-            //}
-
-            //else
-            //{
-            //    foreach (var spawner in spawnList)
-            //        spawner.gameObject.SetActive(false);
-
-            //    if (spawnStory.childCount == 0)
-            //        Instantiate(specialCustomer, spawnStory);
-            //}
+            else if (_Object.numberOfObjectAccepted == 4)
+                AddCharacter(spawnStory, specialCustomer);
         }
 
         public void addCharacterRaisin()
@@ -343,7 +270,6 @@ namespace Com.IsartDigital.TitouanShop
         {
             gm.AddRaisin();
             AddCharacter(pourMonsieurLicorne, specialCustomer);
-            //AddCharacter(spawnStory, specialCustomer);
             doPhase3 = false;
         }
     }
