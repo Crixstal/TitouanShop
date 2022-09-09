@@ -10,6 +10,8 @@ namespace Com.IsartDigital.TitouanShop
         public GameObject requestedObject;
         public Color color = Color.white;
 
+
+
         void Start()
         {
             Rect rect = GetComponent<RectTransform>().rect;
@@ -21,7 +23,20 @@ namespace Com.IsartDigital.TitouanShop
 
         public void CreateBubble()
         {
-            Instantiate(requestedObject, transform).transform.GetChild(0).GetComponentInChildren<Image>().color = color;
+            Transform _requestedObject = Instantiate(requestedObject, transform.GetChild(0)).transform.GetChild(0);
+            _requestedObject.GetComponent<_Object>().enabled = false;
+            _requestedObject.GetComponentInChildren<Image>().color = color;
+            _requestedObject.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+            _requestedObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+
+
+        }
+
+        private void Update()
+        {
+            Rect rect = GetComponent<RectTransform>().rect;
+
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(rect.width, rect.height);
         }
     }
 }

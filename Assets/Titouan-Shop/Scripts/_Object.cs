@@ -33,6 +33,12 @@ namespace Com.IsartDigital.TitouanShop
             canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
             rectransform = transform.parent.GetComponent<RectTransform>();
         }
+
+        private void Start()
+        {
+            rectransform.sizeDelta = new Vector2(188f,222f);
+        }
+
         private void Update()
         {
             counterDelayStart += Time.deltaTime;
@@ -292,22 +298,90 @@ namespace Com.IsartDigital.TitouanShop
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
-            {
-                customerToCheck = collision.gameObject;
-                spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
-                gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
-                colorToCheck = collision.GetComponent<Customer>().color;
-                exitCustomerCollider = false;
-            }
+            //if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
+            //{
+            //    customerToCheck = collision.gameObject;
+            //    spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
+            //    gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
+            //    colorToCheck = collision.GetComponent<Customer>().color;
+            //    exitCustomerCollider = false;
+            //}
 
-            if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER && exitCustomerCollider)
+            //if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER && exitCustomerCollider)
+            //{
+            //    customerToCheck = collision.gameObject;
+            //    spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
+            //    gameObjectToCheck = collision.GetComponent<SpecialCustomer>().requestedObject;
+            //    colorToCheck = collision.GetComponent<SpecialCustomer>().color;
+            //    exitCustomerCollider = false;
+            //}
+
+            if (collision.gameObject.tag == TAG_CHARACTER)
             {
-                customerToCheck = collision.gameObject;
-                spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
-                gameObjectToCheck = collision.GetComponent<SpecialCustomer>().requestedObject;
-                colorToCheck = collision.GetComponent<SpecialCustomer>().color;
-                exitCustomerCollider = false;
+
+                Debug.Log("Collision");
+
+                if (collision.transform.parent.name == "LeftBubble")
+                {
+                    spawnerCharacter = collision.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
+                    customerToCheck = spawnerCharacter.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
+
+                    if (customerToCheck.name != "SpecialCustomer(Clone)")
+                    {
+                        gameObjectToCheck = customerToCheck.GetComponent<Customer>().requestedObject;
+                        colorToCheck = customerToCheck.GetComponent<Customer>().color;
+                    }
+                    else
+                    {
+                        gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
+                        colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
+                    }
+                    exitCustomerCollider = false;
+                }
+                else if (collision.transform.parent.name == "RightBubble")
+                {
+                    spawnerCharacter = collision.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
+                    customerToCheck = spawnerCharacter.transform.GetChild(0).GetChild(2).GetChild(0).gameObject;
+                    if (customerToCheck.name != "SpecialCustomer(Clone)")
+                    {
+                        gameObjectToCheck = customerToCheck.GetComponent<Customer>().requestedObject;
+                        colorToCheck = customerToCheck.GetComponent<Customer>().color;
+                    }
+                    else
+                    {
+                        gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
+                        colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
+                    }
+                    exitCustomerCollider = false;
+                }
+                else if (collision.transform.parent.name == "MiddleBubble")
+                {
+                    spawnerCharacter = collision.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
+
+                    if (spawnerCharacter.transform.GetChild(1).GetChild(0).childCount == 0)
+                    {
+                        customerToCheck = spawnerCharacter.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+
+                        if (customerToCheck.name != "SpecialCustomer(Clone)")
+                        {
+                            gameObjectToCheck = customerToCheck.GetComponent<Customer>().requestedObject;
+                            colorToCheck = customerToCheck.GetComponent<Customer>().color;
+                        }
+                        else
+                        {
+                            gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
+                            colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
+                        }
+                        exitCustomerCollider = false;
+                    }else
+                    {
+                        customerToCheck = spawnerCharacter.transform.GetChild(1).GetChild(0).GetChild(0).gameObject;
+                        gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
+                        colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
+                        exitCustomerCollider = false;
+                        Debug.Log("CollisionSpecialCustomer");
+                    }
+                }
             }
         }
         private void OnTriggerExit2D(Collider2D collision)
