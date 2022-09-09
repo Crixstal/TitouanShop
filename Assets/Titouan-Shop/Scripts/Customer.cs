@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
-using Com.IsartDigital.TitouanShop.TitouanShop;
-using UnityEngine.Pool;
 using FMOD.Studio;
 using FMODUnity;
-using UnityEditor.Animations;
 
 namespace Com.IsartDigital.TitouanShop
 {
