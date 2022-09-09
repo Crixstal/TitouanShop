@@ -15,6 +15,7 @@ namespace Com.IsartDigital.TitouanShop
         [SerializeField] public Color color = Color.white;
 
         public static bool afterLicorne;
+        public static bool apparitionMonsieurLicorne = false;
 
         private void Start()
         {
@@ -48,6 +49,7 @@ namespace Com.IsartDigital.TitouanShop
                 GetComponent<Image>().sprite = specialCustSpriteList[4];
                 requestedObject = GameManager.allObjectAvailable[4];
                 color = GameManager.allColorAvailable[0];
+                apparitionMonsieurLicorne = true;
             }
 
             //Rect rect = GetComponent<RectTransform>().rect;
@@ -67,6 +69,8 @@ namespace Com.IsartDigital.TitouanShop
                 SpawnerCharacter.storyDone = true;
                 SpawnerCharacter.monsieurLicorne = false;
                 afterLicorne = true;
+                apparitionMonsieurLicorne = false;
+ 
             }
         }
     }

@@ -298,29 +298,8 @@ namespace Com.IsartDigital.TitouanShop
         }
         private void OnTriggerStay2D(Collider2D collision)
         {
-            //if (collision.gameObject.tag == TAG_CHARACTER && exitCustomerCollider)
-            //{
-            //    customerToCheck = collision.gameObject;
-            //    spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
-            //    gameObjectToCheck = collision.GetComponent<Customer>().requestedObject;
-            //    colorToCheck = collision.GetComponent<Customer>().color;
-            //    exitCustomerCollider = false;
-            //}
-
-            //if (collision.gameObject.tag == TAG_SPECIAL_CHARACTER && exitCustomerCollider)
-            //{
-            //    customerToCheck = collision.gameObject;
-            //    spawnerCharacter = customerToCheck.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
-            //    gameObjectToCheck = collision.GetComponent<SpecialCustomer>().requestedObject;
-            //    colorToCheck = collision.GetComponent<SpecialCustomer>().color;
-            //    exitCustomerCollider = false;
-            //}
-
             if (collision.gameObject.tag == TAG_CHARACTER)
             {
-
-                Debug.Log("Collision");
-
                 if (collision.transform.parent.name == "LeftBubble")
                 {
                     spawnerCharacter = collision.transform.parent.parent.parent.GetComponent<SpawnerCharacter>();
@@ -360,7 +339,15 @@ namespace Com.IsartDigital.TitouanShop
 
                     if (spawnerCharacter.transform.GetChild(1).GetChild(0).childCount == 0)
                     {
-                        customerToCheck = spawnerCharacter.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+
+                        if (SpecialCustomer.apparitionMonsieurLicorne)
+                        {
+                            customerToCheck = spawnerCharacter.transform.parent.GetChild(4).GetChild(0).GetChild(0).gameObject;
+                        }
+                        else
+                        {
+                            customerToCheck = spawnerCharacter.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
+                        }
 
                         if (customerToCheck.name != "SpecialCustomer(Clone)")
                         {
@@ -372,6 +359,7 @@ namespace Com.IsartDigital.TitouanShop
                             gameObjectToCheck = customerToCheck.GetComponent<SpecialCustomer>().requestedObject;
                             colorToCheck = customerToCheck.GetComponent<SpecialCustomer>().color;
                         }
+
                         exitCustomerCollider = false;
                     }else
                     {
